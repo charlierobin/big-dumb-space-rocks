@@ -16,8 +16,14 @@ public class StandardWeapon : MonoBehaviour
     {
         if (Time.time < this.timer) return;
 
+
+        Rigidbody2D rb = this.GetComponentInParent<Rigidbody2D>();
+
+
         GameObject newBullet = Instantiate(this.bulletPrefab, this.bulletSpawnPoint.transform.position, Quaternion.identity);
-        newBullet.GetComponent<Bullet>().Fire(this.transform, 3.0f, this.powerCount);
+
+
+        newBullet.GetComponent<Bullet>().Fire(this.transform, 3.0f + rb.velocity.magnitude, this.powerCount);
 
         this.timer = Time.time + this.interval;
     }

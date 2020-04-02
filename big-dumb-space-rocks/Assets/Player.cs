@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : Singleton<Player>
 {
+    public GameObject engineGlow;
+
     private float speed = 100.0f;
 
     private Rigidbody2D rb;
@@ -46,23 +48,34 @@ public class Player : Singleton<Player>
 
         if (Input.GetButton("Shield"))
         {
-            this.gameObject.BroadcastMessage("Shield", SendMessageOptions.DontRequireReceiver);
+            this.gameObject.BroadcastMessage("ShieldUp", SendMessageOptions.DontRequireReceiver);
+        }
+        else if (Input.GetButtonUp("Shield"))
+        {
+            this.gameObject.BroadcastMessage("ShieldDown", SendMessageOptions.DontRequireReceiver);
         }
 
         float rotation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
         this.transform.Rotate(0, 0, -rotation);
 
+
+
+
         float thrust = Input.GetAxis("Vertical") * 10.0f * Time.deltaTime;
 
-        this.rb.AddForce(this.transform.up * thrust, ForceMode2D.Impulse);
+        if (thrust > 0.0f && this.rb.velocity.magnitude < 5.0f)
+        {
+            this.rb.AddForce(this.transform.up * thrust, ForceMode2D.Impulse);
+            this.BroadcastMessage("EngineOn", SendMessageOptions.DontRequireReceiver);
+        }
+        else
+        {
+            this.BroadcastMessage("EngineOff", SendMessageOptions.DontRequireReceiver);
+        }
 
-        // TODO implement a max speed?
-    }
 
-    public void powerUp(PowerUp powerUp)
-    {
-        this.gameObject.BroadcastMessage("PowerUp", powerUp, SendMessageOptions.DontRequireReceiver);
+
     }
 
     private void FixedUpdate()
@@ -84,5 +97,10 @@ public class Player : Singleton<Player>
         {
             this.transform.position = new Vector2(ScreenBounds.Instance.bounds.xMax, this.transform.position.y);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }

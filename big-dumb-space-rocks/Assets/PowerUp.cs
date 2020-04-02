@@ -38,7 +38,7 @@ public class PowerUp : MonoBehaviour
 
         Explosions.Instance.newAt(this.transform);
 
-        Player.Instance.powerUp(this);
+        Player.Instance.gameObject.BroadcastMessage("PowerUp", this, SendMessageOptions.DontRequireReceiver);
 
         Destroy(this.gameObject,0.25f);
     }
