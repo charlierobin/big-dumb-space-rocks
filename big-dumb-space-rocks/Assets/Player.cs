@@ -22,7 +22,7 @@ public class Player : Singleton<Player>
         console = console + GetComponentInChildren<MultiShotWeapon>().consoleMessage();
         console = console + GetComponentInChildren<Shields>().consoleMessage();
 
-        GUI.Label(new Rect(20, 20, 500, 500), console);
+        GUI.Label(new Rect(20, 45, 500, 500), console);
     }
 
     private void Update()

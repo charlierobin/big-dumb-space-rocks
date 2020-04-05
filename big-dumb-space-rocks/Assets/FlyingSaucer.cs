@@ -10,12 +10,21 @@ public class FlyingSaucer : MonoBehaviour
         rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode2D.Impulse);
     }
 
-    public void Hit(GameObject sender)
+    public void Hit()
     {
         Destroy(GetComponent<CircleCollider2D>());
-
         Explosions.Instance.newAt(this.transform);
+        Game.Instance.addToScore(1000);
+        Destroy(this.gameObject, 0.1f);
+    }
 
-        Destroy(this.gameObject, 0.25f);
+    private void ShieldHit()
+    {
+        this.Hit();
+    }
+
+    private void BigBoomHit()
+    {
+        this.Hit();
     }
 }

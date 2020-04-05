@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FadeOut : MonoBehaviour
 {
-    public UnityEngine.UI.Image[] elements;
-
     private bool fadingOut;
     private float alpha = 1.0f;
 
@@ -27,10 +25,7 @@ public class FadeOut : MonoBehaviour
             }
             else
             {
-                foreach (UnityEngine.UI.Image element in this.elements)
-                {
-                    element.color = new Color(element.color.r, element.color.g, element.color.b, this.alpha);
-                }
+                this.GetComponent<UnityEngine.CanvasGroup>().alpha = this.alpha;
             }
         }
     }

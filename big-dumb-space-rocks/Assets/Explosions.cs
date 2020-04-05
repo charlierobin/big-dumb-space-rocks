@@ -36,9 +36,9 @@ public class Explosions : Singleton<Explosions>
         newExplosion.SetActive(true);
     }
 
-    public void sparksAt(Transform transform, GameObject bullet)
+    public void sparksAt(GameObject bullet)
     {
-        GameObject sparks = Instantiate(sparksPrefab, new Vector3(transform.position.x, transform.position.y, -4.0f), bullet.transform.rotation);
+        GameObject sparks = Instantiate(sparksPrefab, new Vector3(bullet.transform.position.x, bullet.transform.position.y, -4.0f), bullet.transform.rotation);
 
         sparks.SetActive(true);
     }

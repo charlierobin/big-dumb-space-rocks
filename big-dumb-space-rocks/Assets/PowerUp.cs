@@ -8,7 +8,7 @@ public class PowerUp : MonoBehaviour
     public Prize prize;
 
     public GameObject countdown;
-    
+
     private void Start()
     {
         this.timer = Time.time + Random.Range(15.0f, 25.0f);
@@ -31,15 +31,22 @@ public class PowerUp : MonoBehaviour
         }
     }
 
-    private void Hit(GameObject sender)
+    private void Hit()
     {
         Destroy(GetComponent<CircleCollider2D>());
-
         Explosions.Instance.newAt(this.transform);
-
         Player.Instance.gameObject.BroadcastMessage("PowerUp", this, SendMessageOptions.DontRequireReceiver);
+        Destroy(this.gameObject, 0.1f);
+    }
 
-        Destroy(this.gameObject,0.25f);
+    private void ShieldHit()
+    {
+        this.Hit();
+    }
+
+    private void BigBoomHit()
+    {
+        this.Hit();
     }
 }
 

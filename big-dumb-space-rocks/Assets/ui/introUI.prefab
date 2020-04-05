@@ -311,10 +311,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4254273297953273999}
+  - component: {fileID: 5759841900887735920}
   - component: {fileID: 3243578159847418320}
   - component: {fileID: 965362655915884412}
   m_Layer: 0
-  m_Name: intro
+  m_Name: introUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,6 +336,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &5759841900887735920
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254273297953273998}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &3243578159847418320
 MonoBehaviour:
   m_ObjectHideFlags: 0
