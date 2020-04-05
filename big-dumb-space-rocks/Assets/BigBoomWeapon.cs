@@ -42,7 +42,6 @@ public class BigBoomWeapon : MonoBehaviour
                     this.newBullet.GetComponent<BigBoomBullet>().ExplodedByUser();
                 }
             }
-
             this.newBullet = null;
         }
     }

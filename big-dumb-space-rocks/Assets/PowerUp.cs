@@ -17,7 +17,6 @@ public class PowerUp : MonoBehaviour
     public void Initialise(Prize prize)
     {
         this.prize = prize;
-        this.gameObject.SetActive(true);
     }
 
     private void Update()

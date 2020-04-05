@@ -11,7 +11,7 @@ public class ScreenBounds : Singleton<ScreenBounds>
     private void Start()
     {
         float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-        float horizExtent = vertExtent * Screen.width / Screen.height;
+        float horizExtent = vertExtent * ((Screen.width * 1.0f) / Screen.height);
 
         this.bounds = new Rect(-horizExtent, -vertExtent, horizExtent * 2, vertExtent * 2);
 
@@ -20,31 +20,29 @@ public class ScreenBounds : Singleton<ScreenBounds>
         this.boundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - margin, (horizExtent * 2) + margin + margin, (vertExtent * 2) + margin + margin);
     }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 
     private void OnDrawGizmos()
     {
         float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-        float horizExtent = vertExtent * Screen.width / Screen.height;
+        float horizExtent = vertExtent * Camera.main.GetComponent<Camera>().aspect;
+
+        Rect cameraBounds = new Rect(-horizExtent, -vertExtent, horizExtent * 2, vertExtent * 2);
 
         Gizmos.color = Color.green;
-        
-        Rect bounds = new Rect(-horizExtent, -vertExtent, horizExtent * 2, vertExtent * 2);
 
-        Gizmos.DrawWireCube(this.transform.position, new Vector3(bounds.width, bounds.height, 1.0f));
-        Handles.Label(bounds.position, "View");
+        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBounds.width, cameraBounds.height, 1.0f));
+        Handles.Label(cameraBounds.position, "View");
 
         float margin = 0.5f;
 
-        Rect boundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - margin, (horizExtent * 2) + margin + margin, (vertExtent * 2) + margin + margin);
+        Rect cameraBoundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - margin, (horizExtent * 2) + margin + margin, (vertExtent * 2) + margin + margin);
 
         Gizmos.color = Color.red;
 
-        Gizmos.DrawWireCube(this.transform.position, new Vector3(boundsWithMargin.width, boundsWithMargin.height, 1.0f));
-        Handles.Label(boundsWithMargin.position, "Margin");
-
-
+        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
+        Handles.Label(cameraBoundsWithMargin.position, "Margin");
     }
 
-    #endif
+#endif
 }

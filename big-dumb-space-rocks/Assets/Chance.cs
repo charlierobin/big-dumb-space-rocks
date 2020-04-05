@@ -20,98 +20,85 @@ public class Chance
         return true;
     }
 
-    public static Vector2 SomewhereOnScreen()
+    public static Vector3 SomewhereOnScreen()
     {
-        float spawnY = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-        float spawnX = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+        float spawnX = Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax);
+        float spawnY = Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax);
 
-        return new Vector2(spawnX, spawnY);
+        return new Vector3(spawnX, spawnY, 0.0f);
     }
 
-    public static (Vector2 position, Vector2 direction) SomewhereOffScreen()
+    public enum Direction
     {
-        float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-        float horizExtent = vertExtent * Screen.width / Screen.height;
+        North,
+        West,
+        South,
+        East
+    }
 
-        float margin = 0.5f;
+    public static Direction RandomDirection()
+    {
+        int dir = Chance.RandomIntegerInRange(1, 4);
 
-        vertExtent = vertExtent + margin;
-        horizExtent = horizExtent + margin;
-
-        float x;
-        float y;
-
-        int sector = Random.Range(1, 5);
-
-        switch (sector)
+        if (dir == 1)
         {
-            case 1:  // north
-
-                y = vertExtent;
-                x = Random.Range(-horizExtent, horizExtent);
-
-                break;
-
-            case 2:  // south
-
-                y = -vertExtent;
-                x = Random.Range(-horizExtent, horizExtent);
-
-                break;
-
-            case 3:  // west
-
-                y = Random.Range(-vertExtent, vertExtent);
-                x = -horizExtent;
-
-                break;
-
-            case 4:  // east
-
-                y = Random.Range(-vertExtent, vertExtent);
-                x = horizExtent;
-
-                break;
-
-            default:
-
-                throw new System.Exception("Unrecognised sector");
+            return Direction.North;
         }
-
-        Vector2 direction;
-
-        switch (sector)
+        else if (dir == 2)
         {
-            case 1:  // north
-
-                direction = new Vector2(0, -Random.Range(0.5f, 1.0f));
-
-                break;
-
-            case 2:  // south
-
-                direction = new Vector2(0, Random.Range(0.5f, 1.0f));
-
-                break;
-
-            case 3:  // west
-
-                direction = new Vector2(Random.Range(0.5f, 1.0f), 0);
-
-                break;
-
-            case 4:  // east
-
-                direction = new Vector2(-Random.Range(0.5f, 1.0f), 0);
-
-                break;
-
-            default:
-
-                throw new System.Exception("Unrecognised sector");
+            return Direction.West;
         }
+        else if (dir == 3)
+        {
+            return Direction.South;
+        }
+        else
+        {
+            return Direction.East;
+        }
+    }
 
-        return (new Vector2(x, y), direction);
+    public static Vector3 SomewhereOffScreen()
+    {
+        Direction dir = Chance.RandomDirection();
+
+        if (dir == Direction.North)
+        {
+            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsWithMargin.yMax, 0.0f);
+        }
+        else if (dir == Direction.West)
+        {
+            return new Vector3(ScreenBounds.Instance.boundsWithMargin.xMin, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), 0.0f);
+        }
+        else if (dir == Direction.South)
+        {
+            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsWithMargin.yMin, 0.0f);
+        }
+        else
+        {
+            return new Vector3(ScreenBounds.Instance.boundsWithMargin.xMax, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), 0.0f);
+        }
+    }
+
+    public static Vector2 DirectionOnScreenFrom(Vector3 from)
+    {
+        if (from.y > ScreenBounds.Instance.bounds.yMax)
+        {
+            return new Vector2(0, -1.0f);
+        }
+        if (from.y < ScreenBounds.Instance.bounds.yMin)
+        {
+            return new Vector2(0, 1.0f);
+        }
+        if (from.x > ScreenBounds.Instance.bounds.xMax)
+        {
+            return new Vector2(-1.0f, 0);
+        }
+        if (from.x < ScreenBounds.Instance.bounds.xMin)
+        {
+            return new Vector2(1.0f, 0);
+        }
+        return new Vector2(0, 0);
     }
 
     public static Prize RandomPrize()

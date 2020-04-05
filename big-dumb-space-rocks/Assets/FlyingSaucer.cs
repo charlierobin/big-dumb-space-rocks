@@ -6,7 +6,6 @@ public class FlyingSaucer : MonoBehaviour
 {
     public void Initialise(Vector2 direction)
     {
-        this.gameObject.SetActive(true);
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
         rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode2D.Impulse);
     }

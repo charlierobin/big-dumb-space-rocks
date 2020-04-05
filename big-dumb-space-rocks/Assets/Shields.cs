@@ -10,18 +10,16 @@ public class Shields : MonoBehaviour
 
     private void ShieldUp()
     {
+        if (this.power <= 0) return;
+
         this.on = true;
-
         this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
     }
 
     private void ShieldDown()
     {
         this.on = false;
-
-        this.transform.localScale = new Vector3(0, 0, 0);
-
+        this.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     private void Update()
@@ -29,6 +27,12 @@ public class Shields : MonoBehaviour
         if (this.on)
         {
             this.power = this.power - 0.01f;
+
+            if (this.power < 0)
+            {
+                this.power = 0.0f;
+                this.ShieldDown();
+            }
         }
     }
 
@@ -49,7 +53,7 @@ public class Shields : MonoBehaviour
     {
         if (this.on)
         {
-            Debug.Log(collision.gameObject.name);
+            collision.gameObject.SendMessage("ShieldHit", SendMessageOptions.DontRequireReceiver);
         }
     }
 }

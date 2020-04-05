@@ -101,6 +101,16 @@ public class Player : Singleton<Player>
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+        if (collision.tag != "hittable") return;
+
+        //collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
+
+        Explosions.Instance.newAt(this.transform);
+
+
+        //Destroy(this.gameObject);
+
+
+
     }
 }

@@ -6,24 +6,15 @@ public class FlyingSaucers : MonoBehaviour
 {
     public GameObject flyingSaucerPrefab;
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         if (Random.Range(1, 1500) == 1)
         {
-            var offScreenPositionAndDirection = Chance.SomewhereOffScreen();
+            GameObject newFlyingSaucer = Instantiate(this.flyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 
-            GameObject newFlyingSaucer = Instantiate(this.flyingSaucerPrefab, offScreenPositionAndDirection.position, Quaternion.identity);
-
-            newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(offScreenPositionAndDirection.direction);
+            newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
         }
     }
 
-
-   
 
 }

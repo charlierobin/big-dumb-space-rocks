@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
 
     public void Fire(Transform shooter, float force, int powerCount)
     {
-        this.gameObject.SetActive(true);
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
         rb.AddForce(shooter.up * force, ForceMode2D.Impulse);
         this.transform.rotation = shooter.rotation;

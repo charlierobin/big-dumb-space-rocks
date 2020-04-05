@@ -10,10 +10,8 @@ public class Asteroids : Singleton<Asteroids>
     {
         if (!Chance.OneIn(500)) return;
 
-        var offScreenPositionAndDirection = Chance.SomewhereOffScreen();
+        GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 
-        GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, offScreenPositionAndDirection.position, Quaternion.identity);
-
-        newAsteroid.GetComponent<Asteroid>().Initialise(offScreenPositionAndDirection.direction);
+        newAsteroid.GetComponent<Asteroid>().Initialise(Chance.DirectionOnScreenFrom(newAsteroid.transform.position));
     }
 }

@@ -19,16 +19,14 @@ public class MultiShotWeapon : MonoBehaviour
         if (Time.time < this.timer) return;
 
         GameObject launcherLeft = Instantiate(this.launcherPrefab, this.launcherSpawnLeft.position, Quaternion.identity);
-        launcherLeft.SetActive(true);
-
+        
         Rigidbody2D rb = launcherLeft.GetComponent<Rigidbody2D>();
         rb.AddForce(this.transform.right * -1.0f, ForceMode2D.Impulse);
         //rb.AddForce(this.transform.up * 2.0f, ForceMode2D.Impulse);
         launcherLeft.transform.rotation = this.transform.rotation;
 
         GameObject launcherRight = Instantiate(this.launcherPrefab, this.launcherSpawnRight.position, Quaternion.identity);
-        launcherRight.SetActive(true);
-
+  
         rb = launcherRight.GetComponent<Rigidbody2D>();
         rb.AddForce(this.transform.right * 1.0f, ForceMode2D.Impulse);
         //rb.AddForce(this.transform.up * 2.0f, ForceMode2D.Impulse);

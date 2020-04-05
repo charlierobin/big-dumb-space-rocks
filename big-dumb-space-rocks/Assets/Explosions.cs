@@ -9,8 +9,6 @@ public class Explosions : Singleton<Explosions>
 
     public GameObject littleExplosionPrefab;
 
-    public GameObject bigBoomExplosion;
-
     public GameObject sparksPrefab;
 
     public void newAt(Transform transform)
@@ -27,13 +25,6 @@ public class Explosions : Singleton<Explosions>
         }
 
         GameObject newExplosion = Instantiate(explosionPrefab, new Vector3(transform.position.x, transform.position.y, -4.0f), Quaternion.identity);
-
-        newExplosion.SetActive(true);
-    }
-
-    public void bigBoomAt(Transform transform)
-    {
-        GameObject newExplosion = Instantiate(bigBoomExplosion, new Vector3(transform.position.x, transform.position.y, -4.0f), Quaternion.identity);
 
         newExplosion.SetActive(true);
     }
