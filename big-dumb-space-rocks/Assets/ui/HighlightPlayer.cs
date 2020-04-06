@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HighlightPlayer : MonoBehaviour
 {
+    public Gradient colourOverTime;
+
     private int pointer = 0;
     private int limit = 99;
 
@@ -25,14 +27,7 @@ public class HighlightPlayer : MonoBehaviour
     {
         UnityEngine.UI.Image image = this.GetComponent<UnityEngine.UI.Image>();
 
-        //if (this.pointer < 3)
-        //{
-        //    image.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        //}
-        //else
-        //{
-        //    image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        //}
+        image.color = this.colourOverTime.Evaluate((1.0f * this.pointer) / this.limit);
 
         if (!this.wait)
         {
