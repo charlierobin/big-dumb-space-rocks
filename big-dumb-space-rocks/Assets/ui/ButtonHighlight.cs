@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 
-public class ButtonHighlight : MonoBehaviour, IPointerEnterHandler //, IPointerExitHandler
+public class ButtonHighlight : MonoBehaviour, IPointerEnterHandler
 {
     public GameObject highlightPrefab;
     public GameObject parentTo;
@@ -22,9 +22,5 @@ public class ButtonHighlight : MonoBehaviour, IPointerEnterHandler //, IPointerE
             this.highlight.transform.SetSiblingIndex(0);
         }
     }
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //}
 }
 

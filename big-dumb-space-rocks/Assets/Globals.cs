@@ -4,26 +4,16 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
-    public GameObject introMenuPrefab;
-    public GameObject gamePrefab;
-
     public List<int> highScores;
 
     private void Start()
     {
-        Resources.LoadAll("");
+        foreach (int score in PlayerPrefsX.GetIntArray("highScores"))
+        {
+            this.highScores.Add(score);
+        }
 
-        //Debug.Log(PlayerPrefs.HasKey("test"));
-
-        //Debug.Log(PlayerPrefsX.GetIntArray( "test" ));
-
-
-        Instantiate(this.introMenuPrefab);
-    }
-
-    private void StartGame()
-    {
-        Instantiate(this.gamePrefab);
+        Debug.Log("highScores: " + this.highScores.Count);
     }
 }
 
