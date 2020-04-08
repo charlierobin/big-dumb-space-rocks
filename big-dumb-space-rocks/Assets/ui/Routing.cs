@@ -33,8 +33,6 @@ public class Routing : MonoBehaviour
     {
         bool handled = false;
 
-        //Debug.Log(message);
-
         switch (message)
         {
             case "introUI/PlayButton":
@@ -43,9 +41,9 @@ public class Routing : MonoBehaviour
                 handled = true;
                 break;
 
-            case "selectDifficultyUI/CancelButton":
+            case "introUI/HighScoresButton":
 
-                Instantiate(this.introUIPrefab);
+                Instantiate(this.highScoresUIPrefab);
                 handled = true;
                 break;
 
@@ -73,10 +71,22 @@ public class Routing : MonoBehaviour
                 handled = true;
                 break;
 
-            case "introUI/HighScoresButton":
+            case "selectDifficultyUI/CancelButton":
 
-                //Instantiate(this.highScoresUIPrefab);
+                Instantiate(this.introUIPrefab);
+                handled = true;
+                break;
 
+            case "highScoresUI/PlayButton":
+
+                Instantiate(this.selectDifficultyUIPrefab);
+                handled = true;
+                break;
+
+            case "highScoresUI/BackButton":
+
+                Instantiate(this.introUIPrefab);
+                handled = true;
                 break;
         }
 

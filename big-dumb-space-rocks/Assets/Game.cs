@@ -13,7 +13,7 @@ public class Game : Singleton<Game>
     private void Start()
     {
         this.ui = Instantiate(this.uiPrefab);
-        // send "startFadeIn" separately? (in on start at the moment)
+        this.scoreDirty = true;
     }
 
     private void Update()
@@ -29,7 +29,6 @@ public class Game : Singleton<Game>
     {
         this.score = this.score + value;
         this.scoreDirty = true;
-        //this.ui.BroadcastMessage("Score", this.score);
     }
 }
 
