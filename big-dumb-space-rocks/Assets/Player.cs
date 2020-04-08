@@ -8,6 +8,8 @@ public class Player : Singleton<Player>
 
     private float speed = 100.0f;
 
+    private float health = 1.0f;
+
     private Rigidbody2D rb;
 
     private void Start()
@@ -22,7 +24,14 @@ public class Player : Singleton<Player>
         console = console + GetComponentInChildren<MultiShotWeapon>().consoleMessage();
         console = console + GetComponentInChildren<Shields>().consoleMessage();
 
-        GUI.Label(new Rect(20, 45, 500, 500), console);
+        console = console + this.consoleMessage();
+
+        GUI.Label(new Rect(20, 150, 500, 500), console);
+    }
+
+    public string consoleMessage()
+    {
+        return "Health: " + this.health + "\n";
     }
 
     private void Update()
@@ -31,7 +40,7 @@ public class Player : Singleton<Player>
         {
             this.gameObject.BroadcastMessage("FireMultiShot", SendMessageOptions.DontRequireReceiver);
         }
-        
+
         if (Input.GetButtonDown("Fire2"))
         {
             this.gameObject.BroadcastMessage("FireBigBoom", SendMessageOptions.DontRequireReceiver);
@@ -110,7 +119,14 @@ public class Player : Singleton<Player>
 
         //Destroy(this.gameObject);
 
+        this.health = this.health - 0.1f;
 
+        if (this.health <= 0.0f)
+        {
+            this.health = 0.0f;
+        }
+
+        Game.Instance.SendMessage("UpdateHealthBarDisplay", this.health);
 
     }
 }

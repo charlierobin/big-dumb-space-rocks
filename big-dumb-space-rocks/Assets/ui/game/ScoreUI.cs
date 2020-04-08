@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScoreUI : MonoBehaviour
 {
-    private void Score(int value)
+    private void UpdateScoreDisplay(int value)
     {
-        this.GetComponent<UnityEngine.UI.Text>().text = "Score: " + value;
+        this.GetComponent<DynamicString>().set(value);
     }
 }

@@ -20,7 +20,7 @@ public class Game : Singleton<Game>
     {
         if (this.scoreDirty)
         {
-            this.ui.BroadcastMessage("Score", this.score);
+            this.ui.BroadcastMessage("UpdateScoreDisplay", this.score);
             this.scoreDirty = false;
         }
     }
@@ -29,6 +29,11 @@ public class Game : Singleton<Game>
     {
         this.score = this.score + value;
         this.scoreDirty = true;
+    }
+
+    private void UpdateHealthBarDisplay(float value)
+    {
+        this.ui.BroadcastMessage("UpdateHealthBarDisplay", value);
     }
 }
 

@@ -8,7 +8,7 @@ public class DynamicString : MonoBehaviour
 
     private List<GameObject> current = new List<GameObject>();
 
-    private void Score(int value)
+    public void set(int value)
     {
         foreach (GameObject digit in this.current)
         {
@@ -17,9 +17,9 @@ public class DynamicString : MonoBehaviour
 
         this.current = new List<GameObject>();
 
-        string toRender = value.ToString();
+        string asString = value.ToString();
 
-        char[] chars = toRender.ToCharArray();
+        char[] chars = asString.ToCharArray();
 
         float x = 0.0f;
 
@@ -28,8 +28,6 @@ public class DynamicString : MonoBehaviour
             int v = int.Parse(System.Convert.ToString(chars[i]));
 
             GameObject digit = Instantiate(this.digits[v], this.transform);
-
-            //digit.SetActive(true);
 
             digit.transform.localPosition = new Vector2(x, 0);
 

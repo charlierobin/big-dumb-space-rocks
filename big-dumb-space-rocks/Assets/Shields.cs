@@ -46,7 +46,7 @@ public class Shields : MonoBehaviour
 
     public string consoleMessage()
     {
-        return "Shield: " + this.power;
+        return "Shield: " + this.power + "\n";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -13,7 +13,7 @@ public class Globals : MonoBehaviour
             this.highScores.Add(score);
         }
 
-        Debug.Log("highScores: " + this.highScores.Count);
+        //Debug.Log("highScores: " + this.highScores.Count);
     }
 }
 
