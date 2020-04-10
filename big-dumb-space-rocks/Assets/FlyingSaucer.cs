@@ -27,4 +27,9 @@ public class FlyingSaucer : MonoBehaviour
     {
         this.Hit();
     }
+
+    private void PlayerHit()
+    {
+        this.Hit();
+    }
 }

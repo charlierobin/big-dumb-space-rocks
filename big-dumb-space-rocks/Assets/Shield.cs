@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shields : MonoBehaviour
+public class Shield : MonoBehaviour
 {
-    private float power = 5.0f;
+    private float power = 1.0f;
 
-    private bool on;
+    public bool on;
+
+    //private bool dirty = false;
 
     private void ShieldUp()
     {
@@ -26,7 +28,7 @@ public class Shields : MonoBehaviour
     {
         if (this.on)
         {
-            this.power = this.power - 0.01f;
+            this.power = this.power - 0.001f;
 
             if (this.power < 0)
             {
@@ -34,19 +36,16 @@ public class Shields : MonoBehaviour
                 this.ShieldDown();
             }
         }
+
+        GameUI.Instance.SendMessage("UpdateShieldBar", this.power);
     }
 
     private void PowerUp(PowerUp powerUp)
     {
         if (powerUp.prize == Prize.Shield)
         {
-            this.power = this.power + 1.0f;
+            this.power = 1.0f;
         }
-    }
-
-    public string consoleMessage()
-    {
-        return "Shield: " + this.power + "\n";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +53,8 @@ public class Shields : MonoBehaviour
         if (this.on)
         {
             collision.gameObject.SendMessage("ShieldHit", SendMessageOptions.DontRequireReceiver);
+
+            this.power = this.power - 0.1f;
         }
     }
 }

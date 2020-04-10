@@ -17,6 +17,11 @@ public class BigBoomWeapon : MonoBehaviour
 
     private GameObject newBullet;
 
+    private void Start()
+    {
+        GameUI.Instance.SendMessage("UpdateBigBoomCount", this.count);
+    }
+
     private void FireBigBoom()
     {
         if (this.count == 0) return;
@@ -29,6 +34,8 @@ public class BigBoomWeapon : MonoBehaviour
 
         this.timer = Time.time + this.interval;
         this.keyDownTimer = Time.time + this.keyDownSensitivity;
+
+        GameUI.Instance.SendMessage("UpdateBigBoomCount", this.count);
     }
 
     private void Update()
@@ -51,12 +58,8 @@ public class BigBoomWeapon : MonoBehaviour
         if (powerUp.prize == Prize.BigBoom)
         {
             this.count++;
+            GameUI.Instance.SendMessage("UpdateBigBoomCount", this.count);
         }
-    }
-
-    public string consoleMessage()
-    {
-        return "Big boom bombs: " + this.count + "\n";
     }
 }
 

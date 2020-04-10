@@ -6,6 +6,8 @@ public class DynamicString : MonoBehaviour
 {
     public GameObject[] digits;
 
+    public GameObject X;
+
     private List<GameObject> current = new List<GameObject>();
 
     public void set(int value)

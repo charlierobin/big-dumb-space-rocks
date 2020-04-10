@@ -57,4 +57,8 @@ public class Asteroid : MonoBehaviour
         this.ShieldHit();
     }
 
+    private void PlayerHit()
+    {
+        this.ShieldHit();
+    }
 }

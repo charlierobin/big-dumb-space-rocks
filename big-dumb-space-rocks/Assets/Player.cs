@@ -10,28 +10,13 @@ public class Player : Singleton<Player>
 
     private float health = 1.0f;
 
+    private float lastHit;
+
     private Rigidbody2D rb;
 
     private void Start()
     {
         this.rb = this.GetComponent<Rigidbody2D>();
-    }
-
-    private void OnGUI()
-    {
-        string console = GetComponentInChildren<StandardWeapon>().consoleMessage();
-        console = console + GetComponentInChildren<BigBoomWeapon>().consoleMessage();
-        console = console + GetComponentInChildren<MultiShotWeapon>().consoleMessage();
-        console = console + GetComponentInChildren<Shields>().consoleMessage();
-
-        console = console + this.consoleMessage();
-
-        GUI.Label(new Rect(20, 150, 500, 500), console);
-    }
-
-    public string consoleMessage()
-    {
-        return "Health: " + this.health + "\n";
     }
 
     private void Update()
@@ -84,6 +69,17 @@ public class Player : Singleton<Player>
         }
 
 
+        if (this.health < 1.0f)
+        {
+            if (Time.time > this.lastHit + 5.0f)
+            {
+                this.health = this.health + 0.01f;
+                this.health = Mathf.Min(this.health, 1.0f);
+            }
+            GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
+        }
+
+
 
     }
 
@@ -112,21 +108,26 @@ public class Player : Singleton<Player>
     {
         if (collision.tag != "hittable") return;
 
-        //collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
+        if (this.GetComponentInChildren<Shield>().on)
+        {
+            return;
+        }
 
-        Explosions.Instance.newAt(this.transform);
+        this.lastHit = Time.time;
 
-
-        //Destroy(this.gameObject);
+        collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
 
         this.health = this.health - 0.1f;
 
         if (this.health <= 0.0f)
         {
             this.health = 0.0f;
+            Explosions.Instance.newAt(this.transform);
+
+            // TODO game over
+            //Destroy(this.gameObject);
         }
 
-        Game.Instance.SendMessage("UpdateHealthBarDisplay", this.health);
-
+        GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
     }
 }
