@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroids : Singleton<Asteroids>
+public class Asteroids : Singleton<Asteroids>, IPingable
 {
     public GameObject asteroidPrefab;
 
-    private void Update()
+    public void ping()
     {
-        if (!Chance.OneIn(500)) return;
-
         GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 
         newAsteroid.GetComponent<Asteroid>().Initialise(Chance.DirectionOnScreenFrom(newAsteroid.transform.position));

@@ -17,16 +17,16 @@ public class BigBoomUI : MonoBehaviour
 
         float x = 0.0f;
 
-        if (value > 6)
-        {
-            for (int i = 0; i < value; i++)
-            {
-                GameObject element = Instantiate(this.icon, this.transform);
-                element.SetActive(true);
-                element.transform.localPosition = new Vector2(x, 0);
-                this.current.Add(element);
-                x = x + element.GetComponent<RectTransform>().rect.width;
-            }
+        //if (value > 6)
+        //{
+        //    for (int i = 0; i < value; i++)
+        //    {
+        //        GameObject element = Instantiate(this.icon, this.transform);
+        //        element.SetActive(true);
+        //        element.transform.localPosition = new Vector2(x, 0);
+        //        this.current.Add(element);
+        //        x = x + element.GetComponent<RectTransform>().rect.width;
+        //    }
 
 
 
@@ -34,8 +34,8 @@ public class BigBoomUI : MonoBehaviour
 
 
 
-        }
-        else
+        //}
+        //else
         {
             for (int i = 0; i < value; i++)
             {

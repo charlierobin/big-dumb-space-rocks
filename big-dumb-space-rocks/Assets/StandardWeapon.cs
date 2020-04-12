@@ -19,7 +19,7 @@ public class StandardWeapon : MonoBehaviour
 
     private void Start()
     {
-        this.interval = this.maximumInterval;
+        this.interval = this.minimumInterval;
 
         GameUI.Instance.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
 

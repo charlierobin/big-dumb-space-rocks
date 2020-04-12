@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingSaucers : MonoBehaviour
+public class FlyingSaucers : Singleton<FlyingSaucers>, IPingable
 {
     public GameObject flyingSaucerPrefab;
 
-    private void Update()
+    public void ping()
     {
-        if (Random.Range(1, 1500) == 1)
-        {
-            GameObject newFlyingSaucer = Instantiate(this.flyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
+        GameObject newFlyingSaucer = Instantiate(this.flyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 
-            newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
-        }
+        newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
     }
-
-
 }

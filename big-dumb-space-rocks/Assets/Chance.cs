@@ -14,9 +14,20 @@ public class Chance
         return Random.Range(from, to + 1);
     }
 
+    public static float RandomFloatInRange(float from, float to)
+    {
+        return Random.Range(from, to + 1);
+    }
+
     public static bool OneIn(int range)
     {
         if (Chance.RandomIntegerInRange(1, range) > 1) return false;
+        return true;
+    }
+
+    public static bool OneIn(float range)
+    {
+        if (Chance.RandomFloatInRange(0, range) > 1.0f) return false;
         return true;
     }
 

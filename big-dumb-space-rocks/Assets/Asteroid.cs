@@ -6,8 +6,12 @@ public class Asteroid : MonoBehaviour
 {
     private int factor = 1; // 1,2,3,4 -> largest asteroid, scale / 1, to smallest asteroid, scale / 4
 
-    public void Initialise(int factor)
+    private GameObject bullet;
+
+    public void Initialise(int factor, GameObject bullet)
     {
+        this.bullet = bullet;
+
         this.factor = factor;
         this.transform.localScale = new Vector3(1.0f / this.factor, 1.0f / this.factor, 1.0f / this.factor);
         Vector2 direction = Random.insideUnitCircle;
@@ -23,6 +27,12 @@ public class Asteroid : MonoBehaviour
 
     private void Hit(GameObject sender)
     {
+        if (sender == this.bullet)
+        {
+            //Debug.Log("same bullet");
+            return;
+        }
+
         Destroy(GetComponent<CircleCollider2D>());
 
         if (this.factor < 4)
@@ -32,7 +42,7 @@ public class Asteroid : MonoBehaviour
             for (int i = 0; i < numberOfBits; i++)
             {
                 GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
-                newAsteroid.GetComponent<Asteroid>().Initialise(this.factor + 1);
+                newAsteroid.GetComponent<Asteroid>().Initialise(this.factor + 1, sender);
             }
             Explosions.Instance.sparksAt(sender.gameObject);
         }

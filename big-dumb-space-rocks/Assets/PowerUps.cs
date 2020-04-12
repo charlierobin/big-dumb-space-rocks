@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUps : MonoBehaviour
+public class PowerUps : Singleton<FlyingSaucers>, IPingable
 {
     public GameObject powerUpPrefab;
 
-    private void Update()
+    public void ping()
     {
-        if (!Chance.OneIn(500)) return;
-
         GameObject newPowerUp = Instantiate(this.powerUpPrefab, Chance.SomewhereOnScreen(), Quaternion.identity);
 
         newPowerUp.GetComponent<PowerUp>().Initialise(Chance.RandomPrize());
