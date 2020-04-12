@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingSaucers : Singleton<FlyingSaucers>, IPingable
+public class FlyingSaucers : Singleton<FlyingSaucers>
 {
     public GameObject flyingSaucerPrefab;
 
-    public void ping()
+    public void create()
     {
         GameObject newFlyingSaucer = Instantiate(this.flyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Generator : MonoBehaviour
 {
@@ -8,15 +9,12 @@ public class Generator : MonoBehaviour
 
     public float period = 10.0f;
 
-    public MonoBehaviour target;
-    private IPingable _target;
+    public UnityEvent watchers;
 
     private float time;
 
     void Start()
     {
-        this._target = (IPingable)this.target;
-
         this.time = Time.time + this.period;
     }
 
@@ -26,7 +24,7 @@ public class Generator : MonoBehaviour
         {
             for (int i = 0; i < this.rate; i++)
             {
-                this._target.ping();
+                this.watchers.Invoke();
             }
 
             this.time = Time.time + this.period;
@@ -34,7 +32,3 @@ public class Generator : MonoBehaviour
     }
 }
 
-interface IPingable
-{
-    void ping();
-}

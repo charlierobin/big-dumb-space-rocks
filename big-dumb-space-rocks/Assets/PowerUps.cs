@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUps : Singleton<FlyingSaucers>, IPingable
+public class PowerUps : Singleton<FlyingSaucers>
 {
     public GameObject powerUpPrefab;
 
-    public void ping()
+    public void create()
     {
         GameObject newPowerUp = Instantiate(this.powerUpPrefab, Chance.SomewhereOnScreen(), Quaternion.identity);
 

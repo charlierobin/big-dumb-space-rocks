@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroids : Singleton<Asteroids>, IPingable
+public class Asteroids : Singleton<Asteroids>
 {
     public GameObject asteroidPrefab;
 
-    public void ping()
+    public void create()
     {
         GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 
