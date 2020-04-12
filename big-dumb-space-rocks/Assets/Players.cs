@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO dead?
+
 public class Players : Singleton<Players>
 {
-    public GameObject playerPrefab;
+    //public GameObject playerPrefab;
 
-    private void Start()
-    {
-        Instantiate(this.playerPrefab);
-    }
+    //private void Start()
+    //{
+    //    Instantiate(this.playerPrefab);
+    //}
 }
 

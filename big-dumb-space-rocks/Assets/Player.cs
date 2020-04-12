@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : Singleton<Player>
 {
     public GameObject engineGlow;
+    public GameObject explosionPrefab;
 
     private float speed = 100.0f;
 
@@ -122,10 +123,12 @@ public class Player : Singleton<Player>
         if (this.health <= 0.0f)
         {
             this.health = 0.0f;
-            Explosions.Instance.newAt(this.transform);
 
-            // TODO game over
-            //Destroy(this.gameObject);
+            Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, -4.0f), Quaternion.identity);
+
+            Destroy(this.gameObject);
+
+            Game.Instance.SendMessage("PlayerKilled");
         }
 
         GameUI.Instance.SendMessage("UpdateHealthBar", this.health);

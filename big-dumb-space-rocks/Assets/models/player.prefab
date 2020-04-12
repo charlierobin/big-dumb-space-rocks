@@ -241,6 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineGlow: {fileID: 442966901902745595}
+  explosionPrefab: {fileID: 3687910695658575250, guid: 8434523435daf4736bdb3bddfd2021af,
+    type: 3}
 --- !u!1 &442966901119780634
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a97b68ab3734dfca8c987182b4212c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  on: 0
 --- !u!58 &442966901287482186
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Game : Singleton<Game>
 {
     public GameObject uiPrefab;
+    public GameObject playerPrefab;
 
     public int score;
     private bool scoreDirty;
@@ -12,6 +13,7 @@ public class Game : Singleton<Game>
     private void Start()
     {
         Instantiate(this.uiPrefab);
+        Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
         this.scoreDirty = true;
     }
 
@@ -28,6 +30,11 @@ public class Game : Singleton<Game>
     {
         this.score = this.score + value;
         this.scoreDirty = true;
+    }
+
+    private void PlayerKilled()
+    {
+        Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
     }
 }
 
