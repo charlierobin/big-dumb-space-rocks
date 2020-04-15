@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    public void SendToRouting(string message)
+    private static void Quit()
     {
-        if (Routing.Handle(this.gameObject, message))
+        Application.Quit();
+    }
+
+    public static int test;
+
+    public static void show(Screens screen)
+    {
+        if (screen == Screens.MainMenu)
         {
-            this.gameObject.SendMessage("StartFadeOut");
-            Destroy(this.gameObject, 2.5f);
+
+
+        }
+        else
+        {
+            throw new System.Exception("Unrecognised Screens enumeration");
         }
     }
+
+    public enum Screens
+    {
+        MainMenu
+    }
 }
+
+

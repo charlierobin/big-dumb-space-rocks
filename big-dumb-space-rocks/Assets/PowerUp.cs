@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     private float timer;
-    public Prize prize;
+    public PowerUps.Prize prize;
 
     public GameObject countdown;
 
@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour
         this.timer = Time.time + Random.Range(15.0f, 25.0f);
     }
 
-    public void Initialise(Prize prize)
+    public void Initialise(PowerUps.Prize prize)
     {
         this.prize = prize;
     }

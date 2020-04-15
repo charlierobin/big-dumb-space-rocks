@@ -7,6 +7,7 @@ public class ScreenBounds : Singleton<ScreenBounds>
 {
     public Rect bounds;
     public Rect boundsWithMargin;
+    public float margin;
 
     private void Start()
     {
@@ -15,9 +16,7 @@ public class ScreenBounds : Singleton<ScreenBounds>
 
         this.bounds = new Rect(-horizExtent, -vertExtent, horizExtent * 2, vertExtent * 2);
 
-        float margin = 0.5f;
-
-        this.boundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - margin, (horizExtent * 2) + margin + margin, (vertExtent * 2) + margin + margin);
+        this.boundsWithMargin = new Rect(-horizExtent - this.margin, -vertExtent - this.margin, (horizExtent * 2) + this.margin + this.margin, (vertExtent * 2) + this.margin + this.margin);
     }
 
 #if UNITY_EDITOR
@@ -34,9 +33,7 @@ public class ScreenBounds : Singleton<ScreenBounds>
         Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBounds.width, cameraBounds.height, 1.0f));
         Handles.Label(cameraBounds.position, "View");
 
-        float margin = 0.5f;
-
-        Rect cameraBoundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - margin, (horizExtent * 2) + margin + margin, (vertExtent * 2) + margin + margin);
+        Rect cameraBoundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - this.margin, (horizExtent * 2) + this.margin + this.margin, (vertExtent * 2) + this.margin + this.margin);
 
         Gizmos.color = Color.red;
 

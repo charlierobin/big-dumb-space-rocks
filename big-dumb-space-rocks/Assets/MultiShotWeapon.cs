@@ -44,7 +44,7 @@ public class MultiShotWeapon : MonoBehaviour
 
     private void PowerUp(PowerUp powerUp)
     {
-        if (powerUp.prize == Prize.MultiPass)
+        if (powerUp.prize == PowerUps.Prize.MultiPass)
         {
             this.count++;
             GameUI.Instance.SendMessage("UpdateMultiShotCount", this.count);

@@ -12,14 +12,14 @@ public class PowerUps : Singleton<FlyingSaucers>
 
         newPowerUp.GetComponent<PowerUp>().Initialise(Chance.RandomPrize());
     }
-}
 
-public enum Prize
-{
-    Faster,
-    MorePowerful,
-    BigBoom,
-    MultiPass,
-    Shield
+    public enum Prize
+    {
+        Faster,
+        MorePowerful,
+        BigBoom,
+        MultiPass,
+        Shield
+    }
 }
 

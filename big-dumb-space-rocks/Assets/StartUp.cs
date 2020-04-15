@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class StartUp : MonoBehaviour
 {
-    public GameObject uiToLaunchAtStart;
-
     void Start()
     {
         Resources.LoadAll("");
-
-        Instantiate(this.uiToLaunchAtStart);
+        UI.show(UI.Screens.MainMenu);
     }
 }

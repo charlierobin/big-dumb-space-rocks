@@ -9,17 +9,20 @@ public class HighlightPlayer : MonoBehaviour
     private int pointer = 0;
     private int limit = 99;
 
-    private List<Sprite> frames;
+    private static List<Sprite> frames;
 
     private bool wait;
 
     private void Start()
     {
-        this.frames = new List<Sprite>();
-
-        for (int i = 0; i <= this.limit; i++)
+        if (HighlightPlayer.frames == null)
         {
-            this.frames.Add(Resources.Load<Sprite>("shockwave/shockwave_" + i.ToString("00000")));
+            HighlightPlayer.frames = new List<Sprite>();
+
+            for (int i = 0; i <= this.limit; i++)
+            {
+                HighlightPlayer.frames.Add(Resources.Load<Sprite>("shockwave/shockwave_" + i.ToString("00000")));
+            }
         }
     }
 
@@ -33,7 +36,7 @@ public class HighlightPlayer : MonoBehaviour
         {
             if (this.pointer <= this.limit)
             {
-                image.sprite = this.frames[this.pointer];
+                image.sprite = HighlightPlayer.frames[this.pointer];
 
                 this.pointer++;
 

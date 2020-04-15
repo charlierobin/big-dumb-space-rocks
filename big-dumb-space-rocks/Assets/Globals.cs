@@ -15,5 +15,14 @@ public class Globals : MonoBehaviour
 
         //Debug.Log("highScores: " + this.highScores.Count);
     }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("OnApplicationQuit");
+
+        int[] toWrite = this.highScores.ToArray();
+
+        PlayerPrefsX.SetIntArray("highScores", toWrite);
+    }
 }
 

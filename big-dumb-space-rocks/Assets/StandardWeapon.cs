@@ -41,14 +41,14 @@ public class StandardWeapon : MonoBehaviour
 
     private void PowerUp(PowerUp powerUp)
     {
-        if (powerUp.prize == Prize.MorePowerful)
+        if (powerUp.prize == PowerUps.Prize.MorePowerful)
         {
             this.powerCount++;
             this.powerCount = Mathf.Min(this.maxPowerCount, this.powerCount);
 
             GameUI.Instance.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
         }
-        else if (powerUp.prize == Prize.Faster)
+        else if (powerUp.prize == PowerUps.Prize.Faster)
         {
             this.interval = this.interval - this.intervalDecrement;
             this.interval = Mathf.Max(this.minimumInterval, this.interval);

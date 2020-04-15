@@ -22,6 +22,13 @@ public class Player : Singleton<Player>
 
     private void Update()
     {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Game.Instance.SendMessage("AbandonGame");
+            Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, -4.0f), Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+
         if (Input.GetButtonDown("Fire3"))
         {
             this.gameObject.BroadcastMessage("FireMultiShot", SendMessageOptions.DontRequireReceiver);
@@ -133,4 +140,5 @@ public class Player : Singleton<Player>
 
         GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
     }
+
 }

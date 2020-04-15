@@ -101,29 +101,29 @@ public class Chance
         return new Vector2(0, 0);
     }
 
-    public static Prize RandomPrize()
+    public static PowerUps.Prize RandomPrize()
     {
         int prize = Chance.RandomIntegerInRange(1, 5);
 
         if (prize == 1)
         {
-            return Prize.Faster;
+            return PowerUps.Prize.Faster;
         }
         else if (prize == 2)
         {
-            return Prize.MorePowerful;
+            return PowerUps.Prize.MorePowerful;
         }
         else if (prize == 3)
         {
-            return Prize.BigBoom;
+            return PowerUps.Prize.BigBoom;
         }
         else if (prize == 4)
         {
-            return Prize.MultiPass;
+            return PowerUps.Prize.MultiPass;
         }
         else
         {
-            return Prize.Shield;
+            return PowerUps.Prize.Shield;
         }
     }
 }

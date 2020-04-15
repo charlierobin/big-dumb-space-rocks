@@ -36,5 +36,10 @@ public class Game : Singleton<Game>
     {
         Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
     }
+
+    public void AbandonGame() {
+        
+        
+    }
 }
 

@@ -55,7 +55,7 @@ public class BigBoomWeapon : MonoBehaviour
 
     private void PowerUp(PowerUp powerUp)
     {
-        if (powerUp.prize == Prize.BigBoom)
+        if (powerUp.prize == PowerUps.Prize.BigBoom)
         {
             this.count++;
             GameUI.Instance.SendMessage("UpdateBigBoomCount", this.count);

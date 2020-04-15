@@ -42,7 +42,7 @@ public class Shield : MonoBehaviour
 
     private void PowerUp(PowerUp powerUp)
     {
-        if (powerUp.prize == Prize.Shield)
+        if (powerUp.prize == PowerUps.Prize.Shield)
         {
             this.power = 1.0f;
         }
