@@ -2,31 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+public class UI : Singleton<UI>
 {
-    private static void Quit()
+    public GameObject mainMenu;
+    public GameObject highScores;
+    public GameObject selectDifficulty;
+    public GameObject pause;
+
+    private void Awake()
     {
-        Application.Quit();
+        this.mainMenu.SetActive(false);
+        this.highScores.SetActive(false);
+        this.selectDifficulty.SetActive(false);
+        this.pause.SetActive(false);
     }
 
-    public static int test;
-
-    public static void show(Screens screen)
+    public void MainMenu()
     {
-        if (screen == Screens.MainMenu)
-        {
-
-
-        }
-        else
-        {
-            throw new System.Exception("Unrecognised Screens enumeration");
-        }
+        this.mainMenu.SetActive(true);
     }
 
-    public enum Screens
+    public void HighScores()
     {
-        MainMenu
+        this.highScores.SetActive(true);
+    }
+
+    public void SelectDifficultyFromMain()
+    {
+        this.selectDifficulty.SetActive(true);
+    }
+
+    public void SelectDifficultyFromHighScores()
+    {
+        this.selectDifficulty.SetActive(true);
+    }
+
+    public void CancelSelectDifficulty()
+    {
+       
+    }
+
+    public void SelectDifficulty_1()
+    {
+       
+    }
+
+    public void SelectDifficulty_2()
+    {
+       
+    }
+
+    public void SelectDifficulty_3()
+    {
+       
+    }
+
+    public void SelectDifficulty_4()
+    {
+       
+    }
+
+    public void Resume()
+    {
+
+    }
+
+    public void GiveUp()
+    {
+
     }
 }
 

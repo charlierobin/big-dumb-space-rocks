@@ -7,6 +7,6 @@ public class StartUp : MonoBehaviour
     void Start()
     {
         Resources.LoadAll("");
-        UI.show(UI.Screens.MainMenu);
+        UI.Instance.MainMenu();
     }
 }

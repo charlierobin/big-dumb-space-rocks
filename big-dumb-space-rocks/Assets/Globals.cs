@@ -8,21 +8,23 @@ public class Globals : MonoBehaviour
 
     private void Start()
     {
-        foreach (int score in PlayerPrefsX.GetIntArray("highScores"))
+        int[] scores = PlayerPrefsX.GetIntArray("highScores");
+
+        foreach (int score in scores)
         {
             this.highScores.Add(score);
         }
 
-        //Debug.Log("highScores: " + this.highScores.Count);
+        Debug.Log("highScores: " + this.highScores.Count);
     }
 
-    private void OnApplicationQuit()
+    public void Quit()
     {
-        Debug.Log("OnApplicationQuit");
-
         int[] toWrite = this.highScores.ToArray();
 
         PlayerPrefsX.SetIntArray("highScores", toWrite);
+
+        Application.Quit();
     }
 }
 
