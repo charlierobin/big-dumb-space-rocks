@@ -2,25 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeIn : MonoBehaviour
+public class FadeIn : Fade
 {
-    public float duration = 1.0f;
-
-    private float started;
-
-    private bool fading;
-    private float alpha = 0.0f;
-
-    private void StartFadeIn()
+    public void Begin()
     {
         this.fading = true;
         this.started = Time.time;
-    }
 
-    private void Start()
-    {
-        this.GetComponent<UnityEngine.CanvasGroup>().alpha = this.alpha;
-        this.StartFadeIn();
+        this.alpha = 0.0f;
+
+        this.gameObject.GetComponent<UnityEngine.CanvasGroup>().alpha = this.alpha;
     }
 
     private void Update()
@@ -28,11 +19,16 @@ public class FadeIn : MonoBehaviour
         if (this.fading)
         {
             this.alpha = Mathf.Lerp(0.0f, 1.0f, (Time.time - this.started) / this.duration);
-            this.GetComponent<UnityEngine.CanvasGroup>().alpha = this.alpha;
+
+            this.apply();
 
             if (this.alpha >= 1.0f)
             {
-                this.gameObject.SendMessageUpwards("FadeInDone", SendMessageOptions.DontRequireReceiver);
+                if (this.sendMessage)
+                {
+                    this.gameObject.SendMessageUpwards("FadeInDone", SendMessageOptions.DontRequireReceiver);
+                }
+
                 this.fading = false;
             }
         }

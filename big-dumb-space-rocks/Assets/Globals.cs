@@ -6,6 +6,8 @@ public class Globals : MonoBehaviour
 {
     public List<int> highScores;
 
+    public GameObject gamePrefab;
+
     private void Start()
     {
         int[] scores = PlayerPrefsX.GetIntArray("highScores");
@@ -16,6 +18,33 @@ public class Globals : MonoBehaviour
         }
 
         Debug.Log("highScores: " + this.highScores.Count);
+    }
+
+    private void newGame(int level)
+    {
+        GameObject game = Instantiate(this.gamePrefab);
+
+        game.GetComponent<Game>().SetDifficulty(level);
+    }
+
+    public void NewGameWithDifficulty1()
+    {
+        this.newGame(1);
+    }
+
+    public void NewGameWithDifficulty2()
+    {
+        this.newGame(2);
+    }
+
+    public void NewGameWithDifficulty3()
+    {
+        this.newGame(3);
+    }
+
+    public void NewGameWithDifficulty4()
+    {
+        this.newGame(4);
     }
 
     public void Quit()

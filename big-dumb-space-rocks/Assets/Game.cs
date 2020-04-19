@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Game : Singleton<Game>
 {
-    public GameObject uiPrefab;
     public GameObject playerPrefab;
 
     public int score;
     private bool scoreDirty;
 
+    private int level;
+
     private void Start()
     {
-        Instantiate(this.uiPrefab);
         Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
         this.scoreDirty = true;
     }
@@ -37,9 +37,14 @@ public class Game : Singleton<Game>
         Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
     }
 
-    public void AbandonGame() {
+    public void AbandonGameDEAD() {
         
         
+    }
+
+    public void SetDifficulty(int level)
+    {
+        this.level = level;
     }
 }
 

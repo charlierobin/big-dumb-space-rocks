@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class StartUp : MonoBehaviour
 {
-    void Start()
+    private void Start()
+    {
+        Invoke("test", 2.0f);
+
+        //Resources.LoadAll("");
+    }
+
+    private void test()
     {
         Resources.LoadAll("");
-        UI.Instance.MainMenu();
     }
 }

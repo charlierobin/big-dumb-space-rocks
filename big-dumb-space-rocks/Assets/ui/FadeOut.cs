@@ -2,30 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeOut : MonoBehaviour
+public class FadeOut : Fade
 {
-    private bool fadingOut;
-    private float alpha = 1.0f;
-
-    private void StartFadeOut()
+    public void Begin()
     {
-        this.fadingOut = true;
+        this.fading = true;
+        this.started = Time.time;
     }
 
     private void Update()
     {
-        if (this.fadingOut)
+        if (this.fading)
         {
-            this.alpha = this.alpha - 0.005f;
+            this.alpha = Mathf.Lerp(1.0f, 0.0f, (Time.time - this.started) / this.duration);
 
-            if (this.alpha < 0.0f)
+            this.apply();
+
+            if (this.alpha <= 0.0f)
             {
-                this.gameObject.SendMessage("FadeOutDone", SendMessageOptions.DontRequireReceiver);
-                this.fadingOut = false;
-            }
-            else
-            {
-                this.GetComponent<UnityEngine.CanvasGroup>().alpha = this.alpha;
+                if (this.sendMessage)
+                {
+                    this.gameObject.SendMessageUpwards("FadeOutDone", SendMessageOptions.DontRequireReceiver);
+                }
+
+                this.fading = false;
+
+                if (this.deactivateOnDone)
+                {
+                    this.gameObject.SetActive(false);
+                }
             }
         }
     }
