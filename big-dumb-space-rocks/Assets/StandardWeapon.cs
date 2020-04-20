@@ -12,6 +12,8 @@ public class StandardWeapon : MonoBehaviour
     private float minimumInterval = 0.2f;
     private float maximumInterval = 0.75f;
 
+    private float superFastInterval = 0.025f;
+
     private float intervalDecrement = 0.05f;
 
     private int powerCount = 0;
@@ -54,6 +56,14 @@ public class StandardWeapon : MonoBehaviour
             this.interval = Mathf.Max(this.minimumInterval, this.interval);
 
             GameUI.Instance.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
+        }
+        else if (powerUp.prize == PowerUps.Prize.SuperFast)
+        {
+            this.interval = this.superFastInterval;
+
+
+
+            GameUI.Instance.SendMessage("SuperFastEnabled");
         }
     }
 }

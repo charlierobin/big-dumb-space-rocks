@@ -38,4 +38,11 @@ public class DynamicString : MonoBehaviour
             x = x + digit.GetComponent<RectTransform>().rect.width;
         }
     }
+
+    private void Start()
+    {
+        this.transform.Find("placeholder").gameObject.SetActive(false);
+
+
+    }
 }

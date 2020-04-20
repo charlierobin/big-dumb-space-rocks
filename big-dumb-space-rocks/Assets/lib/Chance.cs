@@ -103,7 +103,7 @@ public class Chance
 
     public static PowerUps.Prize RandomPrize()
     {
-        int prize = Chance.RandomIntegerInRange(1, 5);
+        int prize = Chance.RandomIntegerInRange(1, System.Enum.GetNames(typeof(PowerUps.Prize)).Length);
 
         if (prize == 1)
         {
@@ -121,9 +121,13 @@ public class Chance
         {
             return PowerUps.Prize.MultiPass;
         }
-        else
+        else if (prize == 5)
         {
             return PowerUps.Prize.Shield;
+        }
+        else
+        {
+            return PowerUps.Prize.SuperFast;
         }
     }
 }

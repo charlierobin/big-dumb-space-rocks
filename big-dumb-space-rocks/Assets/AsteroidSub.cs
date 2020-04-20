@@ -19,14 +19,12 @@ public class AsteroidSub : MonoBehaviour
 
     private void Update()
     {
-        this.transform.Rotate(this.xAngle, this.yAngle, this.zAngle, Space.Self);
+        this.transform.Rotate(this.xAngle * Time.timeScale, this.yAngle * Time.timeScale, this.zAngle * Time.timeScale, Space.Self);
     }
 
-    private void FixedUpdate()
-    {
+    //private void FixedUpdate()
+    //{
 
-    }
-
-
+    //}
 }
 

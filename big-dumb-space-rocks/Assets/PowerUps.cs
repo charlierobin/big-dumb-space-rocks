@@ -19,7 +19,8 @@ public class PowerUps : Singleton<FlyingSaucers>
         MorePowerful,
         BigBoom,
         MultiPass,
-        Shield
+        Shield,
+        SuperFast
     }
 }
 
