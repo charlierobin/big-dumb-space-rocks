@@ -13,6 +13,6 @@ public class StartUp : MonoBehaviour
 
     private void test()
     {
-        Resources.LoadAll("");
+        //Resources.LoadAll("");
     }
 }

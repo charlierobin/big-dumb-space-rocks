@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUps : Singleton<FlyingSaucers>
+public class PowerUps : Singleton<PowerUps>
 {
     public GameObject powerUpPrefab;
 

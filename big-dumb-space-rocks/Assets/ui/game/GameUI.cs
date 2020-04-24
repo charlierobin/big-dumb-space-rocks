@@ -69,5 +69,26 @@ public class GameUI : Singleton<GameUI>
     {
         this.bigBoomDisplay.GetComponent<BigBoomUI>().set(count);
     }
+
+    public GameObject superfastDisplay;
+    public GameObject superfastBar;
+
+    private void SuperFastEnabled()
+    {
+        this.superfastDisplay.SetActive(true);
+    }
+
+    private void SuperFastDisabled()
+    {
+        this.superfastDisplay.SetActive(false);
+    }
+
+    private void UpdateSuperFastBar(float value)
+    {
+        Vector2 scale = this.superfastBar.GetComponent<RectTransform>().localScale;
+
+        this.superfastBar.GetComponent<RectTransform>().localScale = new Vector3(value, 1.0f, 1.0f);
+    }
+
 }
 

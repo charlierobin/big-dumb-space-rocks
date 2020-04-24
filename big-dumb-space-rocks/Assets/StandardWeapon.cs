@@ -12,7 +12,12 @@ public class StandardWeapon : MonoBehaviour
     private float minimumInterval = 0.2f;
     private float maximumInterval = 0.75f;
 
-    private float superFastInterval = 0.025f;
+    private float superFastInterval = 0.05f;
+    private float superFastAmmo;
+    private float superFastAmmoMax;
+    private bool superFastEnabled;
+
+    private float superFastConsumptionRate = 0.005f;
 
     private float intervalDecrement = 0.05f;
 
@@ -26,6 +31,8 @@ public class StandardWeapon : MonoBehaviour
         GameUI.Instance.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
 
         GameUI.Instance.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
+
+        GameUI.Instance.SendMessage("SuperFastDisabled");
     }
 
     private void Fire()
@@ -38,7 +45,25 @@ public class StandardWeapon : MonoBehaviour
 
         newBullet.GetComponent<Bullet>().Fire(this.transform, 3.0f + rb.velocity.magnitude, this.powerCount);
 
-        this.timer = Time.time + this.interval;
+        if (this.superFastEnabled)
+        {
+            this.timer = Time.time + this.superFastInterval;
+            this.superFastAmmo = this.superFastAmmo - this.superFastConsumptionRate;
+
+            this.superFastAmmo = Mathf.Max(this.superFastAmmo, 0.0f);
+
+            GameUI.Instance.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
+
+            if (this.superFastAmmo == 0.0f)
+            {
+                this.superFastEnabled = false;
+                GameUI.Instance.SendMessage("SuperFastDisabled");
+            }
+        }
+        else
+        {
+            this.timer = Time.time + this.interval;
+        }
     }
 
     private void PowerUp(PowerUp powerUp)
@@ -59,11 +84,18 @@ public class StandardWeapon : MonoBehaviour
         }
         else if (powerUp.prize == PowerUps.Prize.SuperFast)
         {
-            this.interval = this.superFastInterval;
-
-
-
-            GameUI.Instance.SendMessage("SuperFastEnabled");
+            if (this.superFastEnabled)
+            {
+                this.superFastAmmo = this.superFastAmmo + 1.0f;
+            }
+            else
+            {
+                this.superFastAmmo = 1.0f;
+                this.superFastEnabled = true;
+                GameUI.Instance.SendMessage("SuperFastEnabled");
+            }
+            this.superFastAmmoMax = this.superFastAmmo;
+            GameUI.Instance.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
         }
     }
 }

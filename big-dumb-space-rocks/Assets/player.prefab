@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 442966900974234316}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,6 +548,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 442966900974234323}
     m_Modifications:
+    - target: {fileID: -4235864157157079176, guid: bc3fff1548f27445a9cc512cdaa67500,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4235864157157079176, guid: bc3fff1548f27445a9cc512cdaa67500,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bc3fff1548f27445a9cc512cdaa67500,
         type: 3}
       propertyPath: m_LocalPosition.x

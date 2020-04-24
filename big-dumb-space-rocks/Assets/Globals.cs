@@ -22,9 +22,13 @@ public class Globals : MonoBehaviour
 
     private void newGame(int level)
     {
-        GameObject game = Instantiate(this.gamePrefab);
+        //GameObject game = Instantiate(this.gamePrefab);
 
-        game.GetComponent<Game>().SetDifficulty(level);
+        //game.GetComponent<Game>().SetDifficulty(level);
+
+        Instantiate(this.gamePrefab);
+
+        Game.Instance.SetDifficulty(level);
     }
 
     public void NewGameWithDifficulty1()
@@ -45,6 +49,17 @@ public class Globals : MonoBehaviour
     public void NewGameWithDifficulty4()
     {
         this.newGame(4);
+    }
+
+    public void Resume()
+    {
+        Pause.Instance.UnPause();
+    }
+
+    public void GiveUp()
+    {
+        Game.Instance.GiveUp();
+        Time.timeScale = 1.0f;
     }
 
     public void Quit()

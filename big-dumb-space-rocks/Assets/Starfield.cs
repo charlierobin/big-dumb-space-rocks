@@ -20,7 +20,20 @@ public class Starfield : MonoBehaviour
     {
         if (rb.angularVelocity.x < limit && rb.angularVelocity.y < limit && rb.angularVelocity.z < limit)
         {
-            rb.AddRelativeTorque(this.random(), this.random(), this.random(), ForceMode.Impulse);
+            Chance.Axis axis = Chance.RandomAxis();
+
+            if (axis == Chance.Axis.X)
+            {
+                rb.AddRelativeTorque(this.random(), 0.0f, 0.0f, ForceMode.Impulse);
+            }
+            else if (axis == Chance.Axis.Y)
+            {
+                rb.AddRelativeTorque(0.0f, this.random(), 0.0f, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddRelativeTorque(0.0f, 0.0f, this.random(), ForceMode.Impulse);
+            }
         }
     }
 

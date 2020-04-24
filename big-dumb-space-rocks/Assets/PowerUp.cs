@@ -41,12 +41,20 @@ public class PowerUp : MonoBehaviour
 
     private void ShieldHit()
     {
-        this.Hit();
+        //this.Hit();
     }
 
     private void BigBoomHit()
     {
-        this.Hit();
+        //this.Hit();
+        // TODO ?????
+    }
+
+    private void OnGUI()
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+
+        GUI.Label(new Rect(screenPos.x, Screen.height - screenPos.y, 1000, 300), this.prize.ToString());
     }
 }
 

@@ -8,8 +8,6 @@ public class BigBoomBlastRadius : MonoBehaviour
 
     private float startScale = 0.0f;
 
-    private float targetRadius = 6.0f;
-
     private float rate = 1.3f;
 
     private float lifetime;
@@ -39,6 +37,8 @@ public class BigBoomBlastRadius : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+
+    private float targetRadius = 6.0f;
 
     private void OnDrawGizmos()
     {

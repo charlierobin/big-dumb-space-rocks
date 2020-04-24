@@ -7,7 +7,7 @@ public class FadeIn : Fade
     public void Begin()
     {
         this.fading = true;
-        this.started = Time.time;
+        this.started = Time.realtimeSinceStartup;
 
         this.alpha = 0.0f;
 
@@ -18,7 +18,7 @@ public class FadeIn : Fade
     {
         if (this.fading)
         {
-            this.alpha = Mathf.Lerp(0.0f, 1.0f, (Time.time - this.started) / this.duration);
+            this.alpha = Mathf.Lerp(0.0f, 1.0f, (Time.realtimeSinceStartup - this.started) / this.duration);
 
             this.apply();
 

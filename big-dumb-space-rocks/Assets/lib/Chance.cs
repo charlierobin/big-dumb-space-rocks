@@ -28,6 +28,31 @@ public class Chance
         return new Vector3(spawnX, spawnY, 0.0f);
     }
 
+    public enum Axis
+    {
+        X,
+        Y,
+        Z
+    }
+
+    public static Axis RandomAxis()
+    {
+        int dir = Chance.RandomIntegerInRange(1, 3);
+
+        if (dir == 1)
+        {
+            return Axis.X;
+        }
+        else if (dir == 2)
+        {
+            return Axis.Y;
+        }
+        else
+        {
+            return Axis.Z;
+        }
+    }
+
     public enum Direction
     {
         North,

@@ -116,6 +116,13 @@ public class Player : Singleton<Player>
             return;
         }
 
+        if (collision.gameObject.TryGetComponent<PowerUp>(out PowerUp powerup))
+        {
+            return;
+        }
+
+
+
         this.lastHit = Time.time;
 
         collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
@@ -134,6 +141,15 @@ public class Player : Singleton<Player>
         }
 
         GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
+
+
+
     }
 
 }
+
+// TODO the player can hit something, a bullet can hit something
+// player -> asteroid, flying saucer, flying saucer bullet
+// player -> power up
+
+// bullet -> asteroid, saucer, powerup

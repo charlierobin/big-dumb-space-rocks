@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 917955835532435664}
   - component: {fileID: 917955835532435667}
+  - component: {fileID: 4094249286023480045}
   - component: {fileID: 917955835532435666}
   - component: {fileID: 455354112818625445}
   - component: {fileID: 917955835532435669}
   - component: {fileID: -1702542323709518463}
+  - component: {fileID: 2587703897624333320}
   - component: {fileID: 917955835532435668}
   - component: {fileID: 6301342579171828371}
   - component: {fileID: 917955835532435671}
@@ -51,6 +53,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdffb73e8adbf4cbabd49e33c89e095d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4094249286023480045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917955835532435670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8e69b5618f54ef99551b9255dfd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delta: 0.05
 --- !u!114 &917955835532435666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 1
-  period: 30
+  period: 5
   watchers:
     m_PersistentCalls:
       m_Calls:
@@ -131,7 +146,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 917955835532435668}
-        m_MethodName: create
+        m_MethodName: createBig
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2587703897624333320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917955835532435670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc592fb83ee7489395b54a24ecf7daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rate: 1
+  period: 30
+  watchers:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 917955835532435668}
+        m_MethodName: createLittle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -153,7 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fe8557544f445e0bba73bfd88fe18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingSaucerPrefab: {fileID: 405044237625924438, guid: be920611fd2a24357ba8122cd83443e5,
+  bigFlyingSaucerPrefab: {fileID: 405044237625924438, guid: be920611fd2a24357ba8122cd83443e5,
+    type: 3}
+  littleFlyingSaucerPrefab: {fileID: 405044237625924438, guid: 9319f3687ee704c2889d75ecaa3ec0a9,
     type: 3}
 --- !u!114 &6301342579171828371
 MonoBehaviour:
@@ -168,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 2
-  period: 10
+  period: 30
   watchers:
     m_PersistentCalls:
       m_Calls:
@@ -209,8 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f33ac9e9f9e410c9d25e296b4f1aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 4254273297953273998, guid: ee03c8d19032c4982836780a97792ed8,
-    type: 3}
   playerPrefab: {fileID: 442966900974234322, guid: 96e84895ad89b4806a57d6be3bd0a45e,
     type: 3}
   score: 0
