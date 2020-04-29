@@ -28,7 +28,7 @@ public class BigBoomWeapon : MonoBehaviour
         if (Time.time < this.timer) return;
 
         this.newBullet = Instantiate(this.bigBoomPrefab, this.bulletSpawnPoint.transform.position, Quaternion.identity);
-        this.newBullet.GetComponent<BigBoomBullet>().Fire(this.transform, 2.0f);
+        this.newBullet.GetComponent<BigBoomBullet>().Fire(this.transform, 5.0f);
 
         this.count--;
 

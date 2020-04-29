@@ -14,6 +14,7 @@ public class FlyingSaucerLittle : FlyingSaucer
     private void Update()
     {
         // TODO sometimes single shots, sometimes a salvo
+        // Can take player's power ups? ... gets a "super salvo" weapon if the player allows it to?
 
         if ( Chance.OneIn(50) )
         {

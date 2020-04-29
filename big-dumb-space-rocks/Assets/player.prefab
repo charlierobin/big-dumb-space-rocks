@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 442966900863278770}
-  bigBoomPrefab: {fileID: 4626331016968806210, guid: 2ac8f82595bc3442bb9f67106ef1589f,
+  bigBoomPrefab: {fileID: 6339647107584933711, guid: 027c77daf06074dd1938aceb00c336fc,
     type: 3}
 --- !u!114 &442966900807556973
 MonoBehaviour:
