@@ -50,11 +50,11 @@ public class PowerUp : MonoBehaviour
         // TODO ?????
     }
 
-    private void OnGUI()
-    {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+    //private void OnGUI()
+    //{
+    //    Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
-        GUI.Label(new Rect(screenPos.x, Screen.height - screenPos.y, 1000, 300), this.prize.ToString());
-    }
+    //    GUI.Label(new Rect(screenPos.x, Screen.height - screenPos.y, 1000, 300), this.prize.ToString());
+    //}
 }
 

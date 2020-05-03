@@ -53,6 +53,26 @@ public class Chance
         }
     }
 
+    public enum RotationDirection
+    {
+        Clockwise,
+        AntiClockwise
+    }
+
+    public static RotationDirection RandomRotationDirection()
+    {
+        int dir = Chance.RandomIntegerInRange(1, 2);
+
+        if (dir == 1)
+        {
+            return RotationDirection.Clockwise;
+        }
+        else
+        {
+            return RotationDirection.AntiClockwise;
+        }
+    }
+
     public enum Direction
     {
         North,
