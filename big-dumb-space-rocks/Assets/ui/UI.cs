@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UI : Singleton<UI>
 {
+    public GameObject startScreen;
     public GameObject pauseScreen;
 
     public void ShowPause()
@@ -14,5 +15,10 @@ public class UI : Singleton<UI>
     public void HidePause()
     {
         pauseScreen.GetComponent<UIScreenController>().Hide();
+    }
+
+    private void Start()
+    {
+        startScreen.GetComponent<UIScreenController>().Show();
     }
 }

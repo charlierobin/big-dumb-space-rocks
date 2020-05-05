@@ -9,10 +9,14 @@ public class UIScreenController : MonoBehaviour
         this.transform.Find("content").gameObject.SetActive(true);
 
         this.gameObject.GetComponentInChildren<FadeIn>().Begin();
+
+        this.gameObject.BroadcastMessage("enable");
     }
 
     public void Hide()
     {
         this.gameObject.GetComponentInChildren<FadeOut>().Begin();
+
+        this.gameObject.BroadcastMessage("disable", SendMessageOptions.DontRequireReceiver);
     }
 }
