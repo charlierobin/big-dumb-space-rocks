@@ -12,4 +12,4 @@ Plenty still to do: intro screen and difficulty levels, tidy up flying saucers a
 
 But I was curious to see about getting the whole thing onto Github ...
 
-[The Unity 3d website](https://unity.com)
+[The Unity website (unity.com)](https://unity.com)
