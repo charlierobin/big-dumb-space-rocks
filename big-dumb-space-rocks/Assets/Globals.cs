@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Globals : MonoBehaviour
+public class Globals : Singleton<Globals>
 {
     public List<int> highScores;
 
@@ -22,10 +22,6 @@ public class Globals : MonoBehaviour
 
     private void newGame(int level)
     {
-        //GameObject game = Instantiate(this.gamePrefab);
-
-        //game.GetComponent<Game>().SetDifficulty(level);
-
         Instantiate(this.gamePrefab);
 
         Game.Instance.SetDifficulty(level);
@@ -51,17 +47,6 @@ public class Globals : MonoBehaviour
         this.newGame(4);
     }
 
-    public void Resume()
-    {
-        Pause.Instance.UnPause();
-    }
-
-    public void GiveUp()
-    {
-        Game.Instance.GiveUp();
-        Time.timeScale = 1.0f;
-    }
-
     public void Quit()
     {
         int[] toWrite = this.highScores.ToArray();
@@ -70,5 +55,35 @@ public class Globals : MonoBehaviour
 
         Application.Quit();
     }
+
+
+
+
+
+
+
+
+    public void Resume()
+    {
+        Pause.Instance.UnPause();
+    }
+
+    public void GiveUp()
+    {
+        Game.Instance.PlayerGaveUp();
+        Time.timeScale = 1.0f;
+    }
+
+    public void PlayerKilled(int score)
+    {
+
+
+
+
+
+
+    }
+
+    
 }
 

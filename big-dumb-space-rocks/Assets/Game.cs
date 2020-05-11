@@ -9,6 +9,8 @@ public class Game : Singleton<Game>
     public int score;
     private bool scoreDirty;
 
+    public int lives = 1;
+
     private int level;
 
     private void Start()
@@ -34,7 +36,16 @@ public class Game : Singleton<Game>
 
     private void PlayerKilled()
     {
-        Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
+        this.lives--;
+
+        if (this.lives > 0)
+        {
+            Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
+        }
+        else
+        {
+            Globals.Instance.PlayerKilled(this.score);
+        }
     }
 
     public void SetDifficulty(int level)
@@ -42,7 +53,7 @@ public class Game : Singleton<Game>
         this.level = level;
     }
 
-    public void GiveUp()
+    public void PlayerGaveUp()
     {
         //Destroy(Player.Instance.gameObject);
         //Destroy(this.gameObject);

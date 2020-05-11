@@ -24,6 +24,17 @@ public class Player : Singleton<Player>
     {
         if (Time.timeScale == 0.0f) return;
 
+        if (Input.GetButtonDown("Debug Reset"))
+        {
+            Destroy(this.gameObject);
+
+            Game.Instance.SendMessage("PlayerKilled");
+        }
+
+
+
+
+
         if (Input.GetButtonDown("Fire3"))
         {
             this.gameObject.BroadcastMessage("FireMultiShot", SendMessageOptions.DontRequireReceiver);
