@@ -9,7 +9,7 @@ public class Game : Singleton<Game>
     public int score;
     private bool scoreDirty;
 
-    public int lives = 1;
+    public int lives = 2;
 
     private int level;
 
@@ -17,13 +17,14 @@ public class Game : Singleton<Game>
     {
         Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
         this.scoreDirty = true;
+        Debug.Log("lives: " + this.lives);
     }
 
     private void Update()
     {
         if (this.scoreDirty)
         {
-            GameUI.Instance.SendMessage("UpdateScoreDisplay", this.score);
+            GameUI.SendMessage("UpdateScoreDisplay", this.score);
             this.scoreDirty = false;
         }
     }
@@ -45,6 +46,7 @@ public class Game : Singleton<Game>
         else
         {
             Globals.Instance.PlayerKilled(this.score);
+            Destroy(this.gameObject);
         }
     }
 

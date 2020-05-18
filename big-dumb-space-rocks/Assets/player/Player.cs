@@ -26,9 +26,7 @@ public class Player : Singleton<Player>
 
         if (Input.GetButtonDown("Debug Reset"))
         {
-            Destroy(this.gameObject);
-
-            Game.Instance.SendMessage("PlayerKilled");
+            this.destroy();
         }
 
 
@@ -90,11 +88,8 @@ public class Player : Singleton<Player>
                 this.health = this.health + 0.01f;
                 this.health = Mathf.Min(this.health, 1.0f);
             }
-            GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
+            GameUI.SendMessage("UpdateHealthBar", this.health);
         }
-
-
-
     }
 
     private void FixedUpdate()
@@ -132,8 +127,6 @@ public class Player : Singleton<Player>
             return;
         }
 
-
-
         this.lastHit = Time.time;
 
         collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
@@ -144,19 +137,20 @@ public class Player : Singleton<Player>
         {
             this.health = 0.0f;
 
-            Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, -4.0f), Quaternion.identity);
-
-            Destroy(this.gameObject);
-
-            Game.Instance.SendMessage("PlayerKilled");
+            this.destroy();
         }
 
-        GameUI.Instance.SendMessage("UpdateHealthBar", this.health);
-
-
-
+        GameUI.SendMessage("UpdateHealthBar", this.health);
     }
 
+    private void destroy()
+    {
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, -4.0f), Quaternion.identity);
+
+        Destroy(this.gameObject);
+
+        Game.Instance.SendMessage("PlayerKilled");
+    }
 }
 
 // TODO the player can hit something, a bullet can hit something

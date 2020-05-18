@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class GameUI : Singleton<GameUI>
 {
+    public static void SendMessage(string name, int value)
+    {
+
+    }
+
+    public static void SendMessage(string name, float value)
+    {
+
+    }
+
+    public static void SendMessage(string name, bool value)
+    {
+
+    }
+
     public GameObject dynamicString;
 
     private void UpdateScoreDisplay(int value)

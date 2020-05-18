@@ -15,7 +15,7 @@ public class MultiShotWeapon : MonoBehaviour
 
     private void Start()
     {
-        GameUI.Instance.SendMessage("UpdateMultiShotCount", this.count);
+        GameUI.SendMessage("UpdateMultiShotCount", this.count);
     }
 
     private void FireMultiShot()
@@ -39,7 +39,7 @@ public class MultiShotWeapon : MonoBehaviour
 
         this.count--;
         this.timer = Time.time + this.interval;
-        GameUI.Instance.SendMessage("UpdateMultiShotCount", this.count);
+        GameUI.SendMessage("UpdateMultiShotCount", this.count);
     }
 
     private void PowerUp(PowerUp powerUp)
@@ -47,7 +47,7 @@ public class MultiShotWeapon : MonoBehaviour
         if (powerUp.prize == PowerUps.Prize.MultiPass)
         {
             this.count++;
-            GameUI.Instance.SendMessage("UpdateMultiShotCount", this.count);
+            GameUI.SendMessage("UpdateMultiShotCount", this.count);
         }
     }
 }

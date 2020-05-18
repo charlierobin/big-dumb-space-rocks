@@ -28,11 +28,11 @@ public class StandardWeapon : MonoBehaviour
     {
         this.interval = this.minimumInterval;
 
-        GameUI.Instance.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
+        GameUI.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
 
-        GameUI.Instance.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
+        GameUI.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
 
-        GameUI.Instance.SendMessage("SuperFastDisabled");
+        GameUI.SendMessage("SuperFast", false);
     }
 
     private void Fire()
@@ -52,12 +52,12 @@ public class StandardWeapon : MonoBehaviour
 
             this.superFastAmmo = Mathf.Max(this.superFastAmmo, 0.0f);
 
-            GameUI.Instance.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
+            GameUI.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
 
             if (this.superFastAmmo == 0.0f)
             {
                 this.superFastEnabled = false;
-                GameUI.Instance.SendMessage("SuperFastDisabled");
+                GameUI.SendMessage("SuperFast", false);
             }
         }
         else
@@ -73,14 +73,14 @@ public class StandardWeapon : MonoBehaviour
             this.powerCount++;
             this.powerCount = Mathf.Min(this.maxPowerCount, this.powerCount);
 
-            GameUI.Instance.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
+            GameUI.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
         }
         else if (powerUp.prize == PowerUps.Prize.Faster)
         {
             this.interval = this.interval - this.intervalDecrement;
             this.interval = Mathf.Max(this.minimumInterval, this.interval);
 
-            GameUI.Instance.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
+            GameUI.SendMessage("UpdateRateOfFireBar", (1.0f - ((this.interval - this.minimumInterval) / (this.maximumInterval - this.minimumInterval))));
         }
         else if (powerUp.prize == PowerUps.Prize.SuperFast)
         {
@@ -92,10 +92,10 @@ public class StandardWeapon : MonoBehaviour
             {
                 this.superFastAmmo = 1.0f;
                 this.superFastEnabled = true;
-                GameUI.Instance.SendMessage("SuperFastEnabled");
+                GameUI.SendMessage("SuperFast", true);
             }
             this.superFastAmmoMax = this.superFastAmmo;
-            GameUI.Instance.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
+            GameUI.SendMessage("UpdateSuperFastBar", this.superFastAmmo / this.superFastAmmoMax);
         }
     }
 }

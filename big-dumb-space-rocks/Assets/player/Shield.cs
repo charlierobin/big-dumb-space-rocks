@@ -37,7 +37,7 @@ public class Shield : MonoBehaviour
             }
         }
 
-        GameUI.Instance.SendMessage("UpdateShieldBar", this.power);
+        GameUI.SendMessage("UpdateShieldBar", this.power);
     }
 
     private void PowerUp(PowerUp powerUp)
