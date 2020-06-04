@@ -87,3 +87,30 @@ public class Globals : Singleton<Globals>
     
 }
 
+//public static void BroadcastAll(string fun, System.Object msg)
+//{
+//    GameObject[] gos = (GameObject[])GameObject.FindObjectsOfType(typeof(GameObject));
+//    foreach (GameObject go in gos)
+//    {
+//        if (go && go.transform.parent == null)
+//        {
+//            go.gameObject.BroadcastMessage(fun, msg, SendMessageOptions.DontRequireReceiver);
+//        }
+//    }
+//}
+
+
+
+
+
+//List<GameObject> rootObjects = new List<GameObject>();
+//Scene scene = SceneManager.GetActiveScene();
+//scene.GetRootGameObjects(rootObjects );
+ 
+// // iterate root objects and do something
+// for (int i = 0; i<rootObjects.Count; ++i)
+// {
+//     GameObject gameObject = rootObjects[i];
+//gameObject.DoSomething();
+// }
+

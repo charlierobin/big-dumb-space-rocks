@@ -27,11 +27,7 @@ public class Asteroid : MonoBehaviour
 
     private void Hit(GameObject sender)
     {
-        if (sender == this.bullet)
-        {
-            //Debug.Log("same bullet");
-            return;
-        }
+        if (sender == this.bullet) return;
 
         Destroy(GetComponent<CircleCollider2D>());
 
@@ -41,8 +37,7 @@ public class Asteroid : MonoBehaviour
 
             for (int i = 0; i < numberOfBits; i++)
             {
-                GameObject newAsteroid = Instantiate(Asteroids.Instance.asteroidPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
-                newAsteroid.GetComponent<Asteroid>().Initialise(this.factor + 1, sender);
+                Asteroids.Instance.create(this.transform.position, this.factor + 1, sender);
             }
             Explosions.Instance.sparksAt(sender.gameObject);
         }

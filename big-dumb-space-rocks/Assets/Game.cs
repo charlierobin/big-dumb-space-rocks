@@ -17,7 +17,7 @@ public class Game : Singleton<Game>
     {
         Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
         this.scoreDirty = true;
-        Debug.Log("lives: " + this.lives);
+        Debug.Log("Start lives: " + this.lives);
     }
 
     private void Update()
@@ -38,6 +38,8 @@ public class Game : Singleton<Game>
     private void PlayerKilled()
     {
         this.lives--;
+
+        Debug.Log("PlayerKilled lives: " + this.lives);
 
         if (this.lives > 0)
         {

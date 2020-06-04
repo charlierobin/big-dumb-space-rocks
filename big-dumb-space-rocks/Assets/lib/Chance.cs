@@ -125,25 +125,38 @@ public class Chance
         }
     }
 
+    private static float Randomise(float angle)
+    {
+        float spread = 70.0f;
+
+        return Random.Range(angle - spread, angle + spread);
+    }
+
     public static Vector2 DirectionOnScreenFrom(Vector3 from)
     {
         if (from.y > ScreenBounds.Instance.bounds.yMax)
         {
-            return new Vector2(0, -1.0f);
+            return Quaternion.AngleAxis(Randomise(180.0f), Vector3.forward) * Vector3.up;
         }
+
         if (from.y < ScreenBounds.Instance.bounds.yMin)
         {
-            return new Vector2(0, 1.0f);
+            return Quaternion.AngleAxis(Randomise(0.0f), Vector3.forward) * Vector3.up;
         }
+
         if (from.x > ScreenBounds.Instance.bounds.xMax)
         {
-            return new Vector2(-1.0f, 0);
+            return Quaternion.AngleAxis(Randomise(270.0f), Vector3.forward) * Vector3.up;
         }
+
         if (from.x < ScreenBounds.Instance.bounds.xMin)
         {
-            return new Vector2(1.0f, 0);
+            return Quaternion.AngleAxis(Randomise(90.0f), Vector3.forward) * Vector3.up;
         }
-        return new Vector2(0, 0);
+
+        throw new System.Exception();
+
+        //return new Vector2(0, 0);
     }
 
     public static PowerUps.Prize RandomPrize()

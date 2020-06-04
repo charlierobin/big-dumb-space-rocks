@@ -14,7 +14,7 @@ public class FlyingSaucers : Singleton<FlyingSaucers>
         newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
     }
 
-    public void createLittle()
+    public void createSmall()
     {
         GameObject newFlyingSaucer = Instantiate(this.littleFlyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
 

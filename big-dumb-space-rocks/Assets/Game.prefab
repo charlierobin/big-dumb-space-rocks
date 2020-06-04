@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 917955835532435664}
   - component: {fileID: 917955835532435667}
   - component: {fileID: 4094249286023480045}
-  - component: {fileID: 917955835532435666}
-  - component: {fileID: 455354112818625445}
+  - component: {fileID: 7842506639383375900}
+  - component: {fileID: 1131851921044777571}
   - component: {fileID: 917955835532435669}
-  - component: {fileID: -1702542323709518463}
-  - component: {fileID: 2587703897624333320}
+  - component: {fileID: 6380286661235701991}
+  - component: {fileID: 80359531347171145}
   - component: {fileID: 917955835532435668}
-  - component: {fileID: 6301342579171828371}
+  - component: {fileID: 7550429514159028788}
   - component: {fileID: 917955835532435671}
   - component: {fileID: 6853778848741807112}
   m_Layer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delta: 0.05
---- !u!114 &917955835532435666
+--- !u!114 &7842506639383375900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
     type: 3}
   sparksPrefab: {fileID: 1287334896205342701, guid: 95abf803a5c5e4f2487d4ce5df463462,
     type: 3}
---- !u!114 &455354112818625445
+--- !u!114 &1131851921044777571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,21 +99,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 1
-  period: 5
-  watchers:
+  period: 10
+  variation: 0
+  summary: 
+  manual: 0
+  manualOnly: 0
+  targets:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 917955835532435669}
-        m_MethodName: create
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &917955835532435669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefab: {fileID: 5393049201350901573, guid: e5c11e102eaaf41489d998ea336d20a6,
     type: 3}
---- !u!114 &-1702542323709518463
+--- !u!114 &6380286661235701991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,22 +134,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 1
-  period: 20
-  watchers:
+  period: 10
+  variation: 0
+  summary: 
+  manual: 0
+  manualOnly: 0
+  targets:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 917955835532435668}
-        m_MethodName: createBig
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2587703897624333320
+      m_Calls: []
+--- !u!114 &80359531347171145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,20 +156,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 1
   period: 30
-  watchers:
+  variation: 0
+  summary: Every 30 seconds
+  manual: 0
+  manualOnly: 0
+  targets:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 917955835532435668}
-        m_MethodName: createLittle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &917955835532435668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +179,7 @@ MonoBehaviour:
     type: 3}
   littleFlyingSaucerPrefab: {fileID: 405044237625924438, guid: 9319f3687ee704c2889d75ecaa3ec0a9,
     type: 3}
---- !u!114 &6301342579171828371
+--- !u!114 &7550429514159028788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,8 +192,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 2
-  period: 30
-  watchers:
+  period: 10
+  variation: 4.5
+  summary: Every 5 seconds
+  manual: 0
+  manualOnly: 0
+  targets:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 917955835532435671}
@@ -257,3 +240,4 @@ MonoBehaviour:
   playerPrefab: {fileID: 442966900974234322, guid: 96e84895ad89b4806a57d6be3bd0a45e,
     type: 3}
   score: 0
+  lives: 2

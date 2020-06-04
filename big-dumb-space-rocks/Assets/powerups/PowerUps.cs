@@ -8,9 +8,14 @@ public class PowerUps : Singleton<PowerUps>
 
     public void create()
     {
+        this.create(Chance.RandomPrize());
+    }
+
+    public void create(Prize type)
+    {
         GameObject newPowerUp = Instantiate(this.powerUpPrefab, Chance.SomewhereOnScreen(), Quaternion.identity);
 
-        newPowerUp.GetComponent<PowerUp>().Initialise(Chance.RandomPrize());
+        newPowerUp.GetComponent<PowerUp>().Initialise(type);
     }
 
     public enum Prize
