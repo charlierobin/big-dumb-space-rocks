@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class FlyingSaucer : MonoBehaviour
 {
+    public GameObject explosionPrefab;
+
     protected int value;
+    protected bool gameOver = false;
 
     public void Initialise(Vector2 direction)
     {
-        Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
-        rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode2D.Impulse);
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+        rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode.Impulse);
     }
 
     // TODO at the moment, bullet detects collision, sends hit ...
@@ -17,8 +20,8 @@ public class FlyingSaucer : MonoBehaviour
 
     public void Hit()
     {
-        Destroy(GetComponent<CircleCollider2D>());
-        Explosions.Instance.newAt(this.transform);
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+
         Game.Instance.addToScore(this.value);
         Destroy(this.gameObject, 0.1f);
     }
@@ -36,5 +39,12 @@ public class FlyingSaucer : MonoBehaviour
     private void PlayerHit()
     {
         this.Hit();
+    }
+
+    public void GameIsOver()
+    {
+        Destroy(GetComponent<WrapAroundScreen>());
+        this.gameObject.AddComponent<DestroyOffScreen>();
+        this.gameOver = true;
     }
 }

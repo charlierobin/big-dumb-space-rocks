@@ -6,8 +6,12 @@ using UnityEditor;
 public class ScreenBounds : Singleton<ScreenBounds>
 {
     public Rect bounds;
-    public Rect boundsWithMargin;
-    public float margin;
+
+    public Rect boundsWrap;
+    public Rect boundsSpawn;
+
+    public float wrapMargin;
+    public float spawnMargin;
 
     private void Start()
     {
@@ -16,7 +20,9 @@ public class ScreenBounds : Singleton<ScreenBounds>
 
         this.bounds = new Rect(-horizExtent, -vertExtent, horizExtent * 2, vertExtent * 2);
 
-        this.boundsWithMargin = new Rect(-horizExtent - this.margin, -vertExtent - this.margin, (horizExtent * 2) + this.margin + this.margin, (vertExtent * 2) + this.margin + this.margin);
+        this.boundsSpawn = new Rect(-horizExtent - this.spawnMargin, -vertExtent - this.spawnMargin, (horizExtent * 2) + this.spawnMargin + this.spawnMargin, (vertExtent * 2) + this.spawnMargin + this.spawnMargin);
+
+        this.boundsWrap = new Rect(-horizExtent - this.wrapMargin, -vertExtent - this.wrapMargin, (horizExtent * 2) + this.wrapMargin + this.wrapMargin, (vertExtent * 2) + this.wrapMargin + this.wrapMargin);
     }
 
 #if UNITY_EDITOR
@@ -33,12 +39,20 @@ public class ScreenBounds : Singleton<ScreenBounds>
         Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBounds.width, cameraBounds.height, 1.0f));
         Handles.Label(cameraBounds.position, "View");
 
-        Rect cameraBoundsWithMargin = new Rect(-horizExtent - margin, -vertExtent - this.margin, (horizExtent * 2) + this.margin + this.margin, (vertExtent * 2) + this.margin + this.margin);
+        Rect cameraBoundsWithMargin = new Rect(-horizExtent - this.spawnMargin, -vertExtent - this.spawnMargin, (horizExtent * 2) + this.spawnMargin + this.spawnMargin, (vertExtent * 2) + this.spawnMargin + this.spawnMargin);
+
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
+        Handles.Label(cameraBoundsWithMargin.position, "Spawn margin");
+
+        cameraBoundsWithMargin = new Rect(-horizExtent - this.wrapMargin, -vertExtent - this.wrapMargin, (horizExtent * 2) + this.wrapMargin + this.wrapMargin, (vertExtent * 2) + this.wrapMargin + this.wrapMargin);
 
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
-        Handles.Label(cameraBoundsWithMargin.position, "Margin");
+        Handles.Label(cameraBoundsWithMargin.position, "Wrap margin");
+
     }
 
 #endif

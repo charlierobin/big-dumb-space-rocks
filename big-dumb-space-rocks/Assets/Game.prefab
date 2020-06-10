@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 917955835532435664}
   - component: {fileID: 917955835532435667}
   - component: {fileID: 4094249286023480045}
-  - component: {fileID: 7842506639383375900}
   - component: {fileID: 1131851921044777571}
   - component: {fileID: 917955835532435669}
   - component: {fileID: 6380286661235701991}
@@ -66,26 +65,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delta: 0.05
---- !u!114 &7842506639383375900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917955835532435670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa11c394e0e824e93baa20f3df81ea53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion1: {fileID: 4438124843165371498, guid: 16a4d2cd5da1b487fa5bde26bd50520c,
-    type: 3}
-  explosion2: {fileID: 1896330013696253352, guid: d0330101f99e84c62addbef8c55e9d0c,
-    type: 3}
-  littleExplosionPrefab: {fileID: 7783327685936524196, guid: a8cde74e2961d4f66a164b15da9b8332,
-    type: 3}
-  sparksPrefab: {fileID: 1287334896205342701, guid: 95abf803a5c5e4f2487d4ce5df463462,
-    type: 3}
 --- !u!114 &1131851921044777571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,13 +79,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 1
   period: 10
-  variation: 0
-  summary: 
+  variation: 8
+  summary: Every 10 seconds
   manual: 0
   manualOnly: 0
   targets:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 917955835532435669}
+        m_MethodName: create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &917955835532435669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,14 +124,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 1
-  period: 10
-  variation: 0
-  summary: 
+  period: 20
+  variation: 19
+  summary: Every 20 seconds
   manual: 0
   manualOnly: 0
   targets:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 917955835532435668}
+        m_MethodName: createBig
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &80359531347171145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,14 +156,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rate: 1
-  period: 30
-  variation: 0
-  summary: Every 30 seconds
+  period: 40
+  variation: 39
+  summary: Every 40 seconds
   manual: 0
   manualOnly: 0
   targets:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 917955835532435668}
+        m_MethodName: createSmall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &917955835532435668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,10 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc592fb83ee7489395b54a24ecf7daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 2
+  rate: 1
   period: 10
-  variation: 4.5
-  summary: Every 5 seconds
+  variation: 9
+  summary: Every 10 seconds
   manual: 0
   manualOnly: 0
   targets:
@@ -223,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8d64da82e1c408db39b6288e6d51da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 9218719478658752258, guid: 921ca629826604494a2248c570452447,
+  asteroidPrefab: {fileID: 738542771018826736, guid: 921ca629826604494a2248c570452447,
     type: 3}
 --- !u!114 &6853778848741807112
 MonoBehaviour:

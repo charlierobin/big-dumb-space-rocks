@@ -39,7 +39,7 @@ public class StandardWeapon : MonoBehaviour
     {
         if (Time.time < this.timer) return;
 
-        Rigidbody2D rb = this.GetComponentInParent<Rigidbody2D>();
+        Rigidbody rb = this.GetComponentInParent<Rigidbody>();
 
         GameObject newBullet = Instantiate(this.bulletPrefab, this.bulletSpawnPoint.transform.position, Quaternion.identity);
 

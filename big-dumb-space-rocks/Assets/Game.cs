@@ -15,7 +15,7 @@ public class Game : Singleton<Game>
 
     private void Start()
     {
-        Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
+        Instantiate(this.playerPrefab, new Vector3(0.0f, 0.0f, SpawnLevels.Instance.objectsZ), Quaternion.identity);
         this.scoreDirty = true;
         Debug.Log("Start lives: " + this.lives);
     }
@@ -43,12 +43,26 @@ public class Game : Singleton<Game>
 
         if (this.lives > 0)
         {
-            Instantiate(this.playerPrefab, new Vector3(), Quaternion.identity);
+            Instantiate(this.playerPrefab, new Vector3(0.0f, 0.0f, SpawnLevels.Instance.objectsZ), Quaternion.identity);
         }
         else
         {
+            this.gameObject.SendMessage("TurnOff", SendMessageOptions.DontRequireReceiver);
+
+            GameObject[] allObjects = Object.FindObjectsOfType<GameObject>();
+
+            foreach (GameObject obj in allObjects)
+            {
+                //Asteroid asteroid = obj.GetComponent<Asteroid>();
+
+                //if (asteroid) asteroid.gameOver();
+
+                obj.SendMessage("GameIsOver", SendMessageOptions.DontRequireReceiver);
+            }
+
             Globals.Instance.PlayerKilled(this.score);
-            Destroy(this.gameObject);
+
+            //Destroy(this.gameObject);
         }
     }
 

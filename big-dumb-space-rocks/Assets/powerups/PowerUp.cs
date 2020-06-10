@@ -9,6 +9,8 @@ public class PowerUp : MonoBehaviour
 
     public GameObject countdown;
 
+    public GameObject explosionPrefab;
+
     private void Start()
     {
         this.timer = Time.time + Random.Range(15.0f, 25.0f);
@@ -23,6 +25,7 @@ public class PowerUp : MonoBehaviour
     {
         if (Time.time > this.timer)
         {
+            Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
             Destroy(this.gameObject);
         }
         else if (this.timer - 5.0f < Time.time)
@@ -33,10 +36,9 @@ public class PowerUp : MonoBehaviour
 
     private void Hit()
     {
-        Destroy(GetComponent<CircleCollider2D>());
-        Explosions.Instance.newAt(this.transform);
         Player.Instance.gameObject.BroadcastMessage("PowerUp", this, SendMessageOptions.DontRequireReceiver);
-        Destroy(this.gameObject, 0.1f);
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     private void ShieldHit()
@@ -56,5 +58,11 @@ public class PowerUp : MonoBehaviour
 
     //    GUI.Label(new Rect(screenPos.x, Screen.height - screenPos.y, 1000, 300), this.prize.ToString());
     //}
+
+    private void GameIsOver()
+    {
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+        Destroy(this.gameObject);
+    }
 }
 

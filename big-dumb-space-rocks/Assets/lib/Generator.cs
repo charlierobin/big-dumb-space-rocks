@@ -94,6 +94,11 @@ public class Generator : MonoBehaviour
         }
     }
 
+    private void TurnOff()
+    {
+        this.manualOnly = true;
+    }
+
     protected virtual void generate()
     {
         // override in subclass

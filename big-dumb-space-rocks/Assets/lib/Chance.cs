@@ -20,12 +20,12 @@ public class Chance
         return true;
     }
 
-    public static Vector3 SomewhereOnScreen()
+    public static Vector3 SomewhereOnScreen(float z)
     {
         float spawnX = Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax);
         float spawnY = Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax);
 
-        return new Vector3(spawnX, spawnY, 0.0f);
+        return new Vector3(spawnX, spawnY, z);
     }
 
     public enum Axis
@@ -103,25 +103,25 @@ public class Chance
         }
     }
 
-    public static Vector3 SomewhereOffScreen()
+    public static Vector3 SomewhereOffScreen(float z)
     {
         Direction dir = Chance.RandomDirection();
 
         if (dir == Direction.North)
         {
-            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsWithMargin.yMax, 0.0f);
+            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsSpawn.yMax, z);
         }
         else if (dir == Direction.West)
         {
-            return new Vector3(ScreenBounds.Instance.boundsWithMargin.xMin, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), 0.0f);
+            return new Vector3(ScreenBounds.Instance.boundsSpawn.xMin, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), z);
         }
         else if (dir == Direction.South)
         {
-            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsWithMargin.yMin, 0.0f);
+            return new Vector3(Random.Range(ScreenBounds.Instance.bounds.xMin, ScreenBounds.Instance.bounds.xMax), ScreenBounds.Instance.boundsSpawn.yMin, z);
         }
         else
         {
-            return new Vector3(ScreenBounds.Instance.boundsWithMargin.xMax, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), 0.0f);
+            return new Vector3(ScreenBounds.Instance.boundsSpawn.xMax, Random.Range(ScreenBounds.Instance.bounds.yMin, ScreenBounds.Instance.bounds.yMax), z);
         }
     }
 
@@ -146,12 +146,12 @@ public class Chance
 
         if (from.x > ScreenBounds.Instance.bounds.xMax)
         {
-            return Quaternion.AngleAxis(Randomise(270.0f), Vector3.forward) * Vector3.up;
+            return Quaternion.AngleAxis(Randomise(90.0f), Vector3.forward) * Vector3.up;
         }
 
         if (from.x < ScreenBounds.Instance.bounds.xMin)
         {
-            return Quaternion.AngleAxis(Randomise(90.0f), Vector3.forward) * Vector3.up;
+            return Quaternion.AngleAxis(Randomise(270.0f), Vector3.forward) * Vector3.up;
         }
 
         throw new System.Exception();

@@ -13,7 +13,7 @@ public class PowerUps : Singleton<PowerUps>
 
     public void create(Prize type)
     {
-        GameObject newPowerUp = Instantiate(this.powerUpPrefab, Chance.SomewhereOnScreen(), Quaternion.identity);
+        GameObject newPowerUp = Instantiate(this.powerUpPrefab, Chance.SomewhereOnScreen(SpawnLevels.Instance.objectsZ), Quaternion.identity);
 
         newPowerUp.GetComponent<PowerUp>().Initialise(type);
     }

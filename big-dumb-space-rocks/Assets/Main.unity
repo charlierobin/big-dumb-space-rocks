@@ -796,7 +796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &342114936
 Transform:
   m_ObjectHideFlags: 0
@@ -3733,7 +3733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1758877520
 Transform:
   m_ObjectHideFlags: 0
@@ -4438,13 +4438,20 @@ MonoBehaviour:
     y: -5
     width: 13.333333
     height: 10
-  boundsWithMargin:
+  boundsWrap:
     serializedVersion: 2
-    x: -7.1666665
-    y: -5.5
-    width: 14.333333
-    height: 11
-  margin: 0.5
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  boundsSpawn:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  wrapMargin: 0
+  spawnMargin: 0
 --- !u!224 &9700983836413022
 RectTransform:
   m_ObjectHideFlags: 0

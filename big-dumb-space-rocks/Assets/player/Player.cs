@@ -8,16 +8,17 @@ public class Player : Singleton<Player>
     public GameObject explosionPrefab;
 
     private float speed = 100.0f;
+    private bool engineOn = false;
 
     private float health = 1.0f;
 
     private float lastHit;
 
-    private Rigidbody2D rb;
+    private Rigidbody rb;
 
     private void Start()
     {
-        this.rb = this.GetComponent<Rigidbody2D>();
+        this.rb = this.GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -70,14 +71,23 @@ public class Player : Singleton<Player>
 
         float thrust = Input.GetAxis("Vertical") * 10.0f * Time.deltaTime;
 
-        if (thrust > 0.0f && this.rb.velocity.magnitude < 5.0f)
+        if (thrust > 0.0f)
         {
-            this.rb.AddForce(this.transform.up * thrust, ForceMode2D.Impulse);
-            this.BroadcastMessage("EngineOn", SendMessageOptions.DontRequireReceiver);
+            if (this.rb.velocity.magnitude < 5.0f) this.rb.AddForce(this.transform.up * thrust, ForceMode.Impulse);
+
+            if (!this.engineOn)
+            {
+                this.engineOn = true;
+                this.BroadcastMessage("EngineOn", SendMessageOptions.DontRequireReceiver);
+            }
         }
         else
         {
-            this.BroadcastMessage("EngineOff", SendMessageOptions.DontRequireReceiver);
+            if (this.engineOn)
+            {
+                this.engineOn = false;
+                this.BroadcastMessage("EngineOff", SendMessageOptions.DontRequireReceiver);
+            }
         }
 
 
@@ -92,28 +102,7 @@ public class Player : Singleton<Player>
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (this.transform.position.y >= ScreenBounds.Instance.bounds.yMax)
-        {
-            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.bounds.yMin);
-        }
-        else if (this.transform.position.y <= ScreenBounds.Instance.bounds.yMin)
-        {
-            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.bounds.yMax);
-        }
-
-        if (this.transform.position.x >= ScreenBounds.Instance.bounds.xMax)
-        {
-            this.transform.position = new Vector2(ScreenBounds.Instance.bounds.xMin, this.transform.position.y);
-        }
-        else if (this.transform.position.x <= ScreenBounds.Instance.bounds.xMin)
-        {
-            this.transform.position = new Vector2(ScreenBounds.Instance.bounds.xMax, this.transform.position.y);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag != "hittable") return;
 
@@ -145,7 +134,7 @@ public class Player : Singleton<Player>
 
     private void destroy()
     {
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, -4.0f), Quaternion.identity);
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
 
         Destroy(this.gameObject);
 

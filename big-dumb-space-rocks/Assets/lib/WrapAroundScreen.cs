@@ -6,22 +6,22 @@ public class WrapAroundScreen : MonoBehaviour
 {
     private void FixedUpdate()
     {
-        if (this.transform.position.y > ScreenBounds.Instance.boundsWithMargin.yMax)
+        if (this.transform.position.y > ScreenBounds.Instance.boundsWrap.yMax)
         {
-            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.boundsWithMargin.yMin);
+            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.boundsSpawn.yMin);
         }
-        else if (this.transform.position.y < ScreenBounds.Instance.boundsWithMargin.yMin)
+        else if (this.transform.position.y < ScreenBounds.Instance.boundsWrap.yMin)
         {
-            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.boundsWithMargin.yMax);
+            this.transform.position = new Vector2(this.transform.position.x, ScreenBounds.Instance.boundsSpawn.yMax);
         }
 
-        if (this.transform.position.x > ScreenBounds.Instance.boundsWithMargin.xMax)
+        if (this.transform.position.x > ScreenBounds.Instance.boundsWrap.xMax)
         {
-            this.transform.position = new Vector2(ScreenBounds.Instance.boundsWithMargin.xMin, this.transform.position.y);
+            this.transform.position = new Vector2(ScreenBounds.Instance.boundsSpawn.xMin, this.transform.position.y);
         }
-        else if (this.transform.position.x < ScreenBounds.Instance.boundsWithMargin.xMin)
+        else if (this.transform.position.x < ScreenBounds.Instance.boundsWrap.xMin)
         {
-            this.transform.position = new Vector2(ScreenBounds.Instance.boundsWithMargin.xMax, this.transform.position.y);
+            this.transform.position = new Vector2(ScreenBounds.Instance.boundsSpawn.xMax, this.transform.position.y);
         }
     }
 }

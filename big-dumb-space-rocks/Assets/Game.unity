@@ -431,8 +431,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2135880404}
   - component: {fileID: 2135880405}
-  - component: {fileID: 2135880407}
   - component: {fileID: 2135880412}
+  - component: {fileID: 2135880408}
   - component: {fileID: 2135880406}
   m_Layer: 0
   m_Name: Globals
@@ -482,7 +482,7 @@ MonoBehaviour:
   highScores: 
   gamePrefab: {fileID: 917955835532435670, guid: ca07257ecd6954745b45cd99e0cfaa20,
     type: 3}
---- !u!114 &2135880407
+--- !u!114 &2135880408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -491,9 +491,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2135880403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d880467a414451091bde0354429c6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 694fea870709d4ce9a7241b459651f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidsZ: 0
+  particlesZ: -5
 --- !u!114 &2135880412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,13 +514,20 @@ MonoBehaviour:
     y: -5
     width: 13.333333
     height: 10
-  boundsWithMargin:
+  boundsWrap:
     serializedVersion: 2
-    x: -7.1666665
-    y: -5.5
-    width: 14.333333
-    height: 11
-  margin: 0.5
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  boundsSpawn:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  wrapMargin: 0.8
+  spawnMargin: 0.4
 --- !u!1001 &1805126629439519040
 PrefabInstance:
   m_ObjectHideFlags: 0

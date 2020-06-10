@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
+    private void Start()
+    {
+        this.EngineOff();
+    }
     private void EngineOn()
     {
         this.transform.localScale = new Vector3(this.transform.localScale.x, 0.3f, 1.0f);

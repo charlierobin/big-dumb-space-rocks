@@ -8,13 +8,14 @@ public class Bullet : MonoBehaviour
 
     public void Fire(Transform shooter, float force, int powerCount)
     {
-        Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
-        rb.AddForce(shooter.up * force, ForceMode2D.Impulse);
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+        rb.AddForce(shooter.up * force, ForceMode.Impulse);
+
         this.transform.rotation = shooter.rotation;
         this.powerCount = powerCount;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "hittable") return;
 

@@ -9,16 +9,15 @@ public class FlyingSaucers : Singleton<FlyingSaucers>
 
     public void createBig()
     {
-        GameObject newFlyingSaucer = Instantiate(this.bigFlyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
+        GameObject newFlyingSaucer = Instantiate(this.bigFlyingSaucerPrefab, Chance.SomewhereOffScreen(SpawnLevels.Instance.objectsZ), Quaternion.identity);
 
         newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
     }
 
     public void createSmall()
     {
-        GameObject newFlyingSaucer = Instantiate(this.littleFlyingSaucerPrefab, Chance.SomewhereOffScreen(), Quaternion.identity);
+        GameObject newFlyingSaucer = Instantiate(this.littleFlyingSaucerPrefab, Chance.SomewhereOffScreen(SpawnLevels.Instance.objectsZ), Quaternion.identity);
 
         newFlyingSaucer.GetComponent<FlyingSaucer>().Initialise(Chance.DirectionOnScreenFrom(newFlyingSaucer.transform.position));
     }
-
 }

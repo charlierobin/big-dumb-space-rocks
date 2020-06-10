@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    private int factor = 1; // 1,2,3,4 -> largest asteroid, scale / 1, to smallest asteroid, scale / 4
+    private int factor = 1;     // 1,2,3,4 -> largest asteroid, scale / 1, to smallest asteroid, scale / 4
 
     private GameObject bullet;
+    public GameObject sparksPrefab;
+    public GameObject explosionPrefab;
+
+    private void Start()
+    {
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+        rb.AddRelativeTorque(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), ForceMode.Impulse);
+    }
 
     public void Initialise(int factor, GameObject bullet)
     {
@@ -21,15 +29,19 @@ public class Asteroid : MonoBehaviour
 
     public void Initialise(Vector2 direction)
     {
-        Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
-        rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode2D.Impulse);
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+        rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode.Impulse);
+    }
+
+    public void GameIsOver()
+    {
+        Destroy(GetComponent<WrapAroundScreen>());
+        this.gameObject.AddComponent<DestroyOffScreen>();
     }
 
     private void Hit(GameObject sender)
     {
         if (sender == this.bullet) return;
-
-        Destroy(GetComponent<CircleCollider2D>());
 
         if (this.factor < 4)
         {
@@ -39,11 +51,11 @@ public class Asteroid : MonoBehaviour
             {
                 Asteroids.Instance.create(this.transform.position, this.factor + 1, sender);
             }
-            Explosions.Instance.sparksAt(sender.gameObject);
+            Instantiate(this.sparksPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, SpawnLevels.Instance.particlesZ), sender.transform.rotation);
         }
         else
         {
-            Explosions.Instance.littleExplosionAt(this.transform);
+            Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
         }
         Game.Instance.addToScore(100 * this.factor);
         Destroy(this.gameObject);
@@ -51,8 +63,7 @@ public class Asteroid : MonoBehaviour
 
     private void ShieldHit()
     {
-        Destroy(GetComponent<CircleCollider2D>());
-        Explosions.Instance.newAt(this.transform);
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
         Game.Instance.addToScore(100 * this.factor);
         Destroy(this.gameObject);
     }
