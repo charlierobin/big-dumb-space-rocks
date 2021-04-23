@@ -58,4 +58,5 @@ public class ScreenBounds : Singleton<ScreenBounds>
     }
 
 #endif
+
 }

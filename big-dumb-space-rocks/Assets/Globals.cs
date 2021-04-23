@@ -9,11 +9,13 @@ public class HighScoreEntry
 {
     public string name;
     public int score;
+    public bool lastGame = false;
 
-    public HighScoreEntry(string name, int score)
+    public HighScoreEntry(string name, int score, bool lastGame = false)
     {
         this.name = name;
         this.score = score;
+        this.lastGame = lastGame;
     }
 }
 
@@ -22,6 +24,8 @@ public class Globals : Singleton<Globals>
     public GameObject playerPrefab;
 
     public List<HighScoreEntry> highScores;
+
+    private int maxNumberOfHighScores = 10;
 
     private int lives = 3;
 
@@ -32,8 +36,18 @@ public class Globals : Singleton<Globals>
     private const string key_HighScores_Names = "highScores_Names";
     private const string key_HighScores_Values = "highScores_Values";
 
+    private Vector2 designSize = new Vector2(1810, 825);
+
+    public float ratio;
+
+    private Vector3 ratioV3;
+
     private void Start()
     {
+        this.ratio = Screen.width / this.designSize.x;
+
+        this.ratioV3 = new Vector3(this.ratio, this.ratio, 1.0f);
+
         this.highScores = new List<HighScoreEntry>();
 
         string[] scores_Names = PlayerPrefsX.GetStringArray(key_HighScores_Names);
@@ -61,11 +75,22 @@ public class Globals : Singleton<Globals>
 
         if (this.lives <= 0)
         {
-            this.highScores.Add(new HighScoreEntry("Charlie (" + System.DateTime.Now.ToString() + ")", this.score));
-
             this.player = null;
 
             this.BroadcastAll("EndGame", null);
+
+            //foreach (HighScoreEntry highscore in this.highScores)
+            //{
+            //    highscore.lastGame = false;
+            //}
+
+            this.highScores.ForEach((value) => value.lastGame = false);
+
+            this.highScores.Add(new HighScoreEntry("Charlie (" + System.DateTime.Now.ToString() + ")", this.score, true));
+
+            this.highScores.Sort((p, q) => q.score.CompareTo(p.score));
+
+            this.highScores = this.highScores.Take(this.maxNumberOfHighScores).ToList();
         }
         else
         {
@@ -75,16 +100,7 @@ public class Globals : Singleton<Globals>
 
     void OnGUI()
     {
-        Vector2 nativeSize = new Vector2(1800, 800);
-
-        float ratio = Screen.width / nativeSize.x;
-
-        //Vector3 scale = new Vector3(Screen.width / nativeSize.x, Screen.height / nativeSize.y, 1.0f);
-
-        Vector3 scale = new Vector3(ratio, ratio, 1.0f);
-
-        GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, scale);
-
+        GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, this.ratioV3);
 
         GUILayout.BeginArea(new Rect(20, 20, Screen.width - 40, Screen.height - 40));
 
@@ -156,9 +172,31 @@ public class Globals : Singleton<Globals>
             {
                 this.lives = 3;
 
+                this.score = 0;
+
                 this.player = Instantiate(this.playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
                 this.BroadcastAll("StartGame", null);
+            }
+
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical(GUILayout.Width(500));
+
+            GUILayout.Label("High scores");
+
+            GUILayout.Space(10);
+
+            foreach (HighScoreEntry highscore in this.highScores)
+            {
+                if (highscore.lastGame)
+                {
+                    GUILayout.Label(highscore.name + ": " + highscore.score.ToString() + " <---");
+                }
+                else
+                {
+                    GUILayout.Label(highscore.name + ": " + highscore.score.ToString());
+                }
             }
 
             GUILayout.EndVertical();

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// https://answers.unity.com/questions/1408574/destroying-and-recreating-a-singleton.html
+
 // Inherit from this base class to create a singleton.
 // e.g. public class MyClassName : Singleton<MyClassName> {}
 

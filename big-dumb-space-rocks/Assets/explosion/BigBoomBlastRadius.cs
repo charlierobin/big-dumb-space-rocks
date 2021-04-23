@@ -68,12 +68,8 @@ public class BigBoomBlastRadius : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, this.GetComponent<SphereCollider>().radius * this.transform.localScale.x);
 
-#if UNITY_EDITOR
-
         Gizmos.color = new Color(1, 0, 0, 0.2f);
         Gizmos.DrawWireSphere(this.transform.position, this.targetRadius);
-
-#endif
     }
 
 

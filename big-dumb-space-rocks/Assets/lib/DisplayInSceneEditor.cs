@@ -5,7 +5,6 @@ using UnityEditor;
 
 public class DisplayInSceneEditor : MonoBehaviour
 {
-
 #if UNITY_EDITOR
 
     private void OnDrawGizmos()
@@ -19,6 +18,5 @@ public class DisplayInSceneEditor : MonoBehaviour
     }
 
 #endif
+
 }
-
-

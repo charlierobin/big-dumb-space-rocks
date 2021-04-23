@@ -53,7 +53,7 @@ public class PowerUp : MonoBehaviour
 
         //Globals.Instance.powerUp(this);
 
-        
+
 
         //Destroy(this.gameObject, 0.1f);
 
@@ -62,8 +62,6 @@ public class PowerUp : MonoBehaviour
 
 
 
-
-#if UNITY_EDITOR
 
     void OnDrawGizmos()
     {
@@ -78,33 +76,24 @@ public class PowerUp : MonoBehaviour
         //Gizmos.DrawWireSphere(this.transform.position, this.targetRadius);
     }
 
-#endif
+
 
     private void OnGUI()
     {
-
-        Vector2 nativeSize = new Vector2(1800, 800);
-
-        float ratio = Screen.width / nativeSize.x;
-
-        //Vector3 scale = new Vector3(Screen.width / nativeSize.x, Screen.height / nativeSize.y, 1.0f);
-
-
-
         GUIStyle style = new GUIStyle();
 
-        style.fontSize = (int)(12 * ratio);
+        style.fontSize = (int)(style.fontSize * Globals.Instance.ratio);
 
         style.normal.textColor = Color.white;
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
 
-        GUI.Label(new Rect(screenPos.x + (20 * ratio), Screen.height - screenPos.y, 1000, 300), this.prize.ToString(), style);
+        GUI.Label(new Rect(screenPos.x + (20 * Globals.Instance.ratio), Screen.height - screenPos.y, 1000, 300), this.prize.ToString(), style);
 
         float remaining = this.timer - Time.time;
 
-        GUI.Label(new Rect(screenPos.x + (20 * ratio), Screen.height - screenPos.y + (20 * ratio), 1000, 300), remaining.ToString(), style);
+        GUI.Label(new Rect(screenPos.x + (20 * Globals.Instance.ratio), Screen.height - screenPos.y + (20 * Globals.Instance.ratio), 1000, 300), remaining.ToString(), style);
 
 
     }
