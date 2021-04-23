@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <circle style="stroke-width: 22px; fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0);" cx="247.369" cy="257.195" r="127.873"/>
-  <path style="stroke: rgb(255, 255, 255); stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-width: 12px;" d="M 334.314 87.595 L 137.98 272.71 C 137.98 272.71 219.603 273.912 219.52 273.912 C 219.437 273.912 142.987 437.643 142.987 437.643 L 350.65 232.354 C 350.65 232.354 275.367 229.86 275.326 229.86 C 275.285 229.86 334.547 86.953 334.314 87.595 Z"/>
-  <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 13px;" d="M 334.314 87.595 L 137.98 272.71 C 137.98 272.71 219.603 273.912 219.52 273.912 C 219.437 273.912 142.987 437.643 142.987 437.643 L 350.65 232.354 C 350.65 232.354 275.367 229.86 275.326 229.86 C 275.285 229.86 334.547 86.953 334.314 87.595 Z"/>
-</svg>

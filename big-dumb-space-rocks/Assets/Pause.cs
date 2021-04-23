@@ -25,12 +25,12 @@ public class Pause : Singleton<Pause>
             if (!this.pausing && !this.paused)
             {
                 this.pausing = true;
-                UI.Instance.ShowPause();
+                //UI.Instance.ShowPause();
             }
             else if (this.paused)
             {
                 this.unpausing = true;
-                UI.Instance.HidePause();
+                //UI.Instance.HidePause();
             }
         }
 
@@ -67,5 +67,33 @@ public class Pause : Singleton<Pause>
     public void UnPause()
     {
         this.unpausing = true;
+    }
+
+    //public void Pause()
+    //{
+
+    //}
+
+    public void GUI()
+    {
+        if (!this.pausing && !this.paused)
+        {
+            if (GUILayout.Button("Pause"))
+            {
+                this.pausing = true;
+            }
+        }
+        else
+        {
+            if (GUILayout.Button("UnPause"))
+            {
+                this.unpausing = true;
+            }
+        }
+    }
+
+    public bool isPaused()
+    {
+        return this.pausing || this.paused;
     }
 }

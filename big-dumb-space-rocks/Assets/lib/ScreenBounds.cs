@@ -29,6 +29,8 @@ public class ScreenBounds : Singleton<ScreenBounds>
 
     private void OnDrawGizmos()
     {
+        if (Camera.current.name == "Main Camera") return;
+
         float vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
         float horizExtent = vertExtent * Camera.main.GetComponent<Camera>().aspect;
 
@@ -36,21 +38,21 @@ public class ScreenBounds : Singleton<ScreenBounds>
 
         Gizmos.color = Color.green;
 
-        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBounds.width, cameraBounds.height, 1.0f));
+        Gizmos.DrawWireCube(Camera.main.transform.position + new Vector3(0, 0, 10), new Vector3(cameraBounds.width, cameraBounds.height, 1.0f));
         Handles.Label(cameraBounds.position, "View");
 
         Rect cameraBoundsWithMargin = new Rect(-horizExtent - this.spawnMargin, -vertExtent - this.spawnMargin, (horizExtent * 2) + this.spawnMargin + this.spawnMargin, (vertExtent * 2) + this.spawnMargin + this.spawnMargin);
 
         Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
+        Gizmos.DrawWireCube(Camera.main.transform.position + new Vector3(0, 0, 10), new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
         Handles.Label(cameraBoundsWithMargin.position, "Spawn margin");
 
         cameraBoundsWithMargin = new Rect(-horizExtent - this.wrapMargin, -vertExtent - this.wrapMargin, (horizExtent * 2) + this.wrapMargin + this.wrapMargin, (vertExtent * 2) + this.wrapMargin + this.wrapMargin);
 
         Gizmos.color = Color.red;
 
-        Gizmos.DrawWireCube(Camera.main.transform.position, new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
+        Gizmos.DrawWireCube(Camera.main.transform.position + new Vector3(0, 0, 10), new Vector3(cameraBoundsWithMargin.width, cameraBoundsWithMargin.height, 1.0f));
         Handles.Label(cameraBoundsWithMargin.position, "Wrap margin");
 
     }

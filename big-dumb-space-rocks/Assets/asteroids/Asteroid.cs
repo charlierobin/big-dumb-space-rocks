@@ -12,6 +12,11 @@ public class Asteroid : MonoBehaviour
 
     private void Start()
     {
+        if (!Globals.Instance.GameRunning())
+        {
+            this.EndGame();
+        }
+
         Rigidbody rb = this.GetComponent<Rigidbody>();
         rb.AddRelativeTorque(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), ForceMode.Impulse);
     }
@@ -33,10 +38,10 @@ public class Asteroid : MonoBehaviour
         rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode.Impulse);
     }
 
-    public void GameIsOver()
+    private void EndGame()
     {
-        Destroy(GetComponent<WrapAroundScreen>());
-        this.gameObject.AddComponent<DestroyOffScreen>();
+        this.GetComponent<WrapAroundScreen>().enabled = false;
+        this.GetComponent<DestroyOffScreen>().enabled = true;
     }
 
     private void Hit(GameObject sender)
@@ -51,30 +56,40 @@ public class Asteroid : MonoBehaviour
             {
                 Asteroids.Instance.create(this.transform.position, this.factor + 1, sender);
             }
-            Instantiate(this.sparksPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, SpawnLevels.Instance.particlesZ), sender.transform.rotation);
+            Instantiate(this.sparksPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, ZLayers.Instance.particles), sender.transform.rotation);
         }
         else
         {
-            Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+            Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
         }
-        Game.Instance.addToScore(100 * this.factor);
-        Destroy(this.gameObject);
-    }
 
-    private void ShieldHit()
-    {
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
-        Game.Instance.addToScore(100 * this.factor);
+        Globals.Instance.addToScore(100 * this.factor);
+
         Destroy(this.gameObject);
     }
 
     private void BigBoomHit()
     {
-        this.ShieldHit();
+        Globals.Instance.addToScore(100 * this.factor);
+
+        Destroy(this.gameObject);
     }
 
-    private void PlayerHit()
+    private void BigBoomBlastHit()
     {
-        this.ShieldHit();
+        Globals.Instance.addToScore(100 * this.factor);
+
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+
+        Destroy(this.gameObject);
+    }
+
+    private void ShieldHit()
+    {
+        Globals.Instance.addToScore(100 * this.factor);
+
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+
+        Destroy(this.gameObject);
     }
 }

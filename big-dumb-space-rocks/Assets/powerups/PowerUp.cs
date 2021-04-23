@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    private float timer;
     public PowerUps.Prize prize;
 
     public GameObject countdown;
 
     public GameObject explosionPrefab;
+
+
+
+    private float timer;
+
+
 
     private void Start()
     {
@@ -21,48 +26,95 @@ public class PowerUp : MonoBehaviour
         this.prize = prize;
     }
 
+
     private void Update()
     {
         if (Time.time > this.timer)
         {
-            Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
             Destroy(this.gameObject);
         }
         else if (this.timer - 5.0f < Time.time)
         {
-            this.countdown.SetActive(true);
+            //this.countdown.SetActive(true);
         }
     }
 
+
     private void Hit()
     {
+        //Destroy(GetComponent<CircleCollider2D>());
+
+        //this.gameObject.GetComponent<SphereCollider>().enabled = false;
+
+        //Explosions.Instance.newAt(this.transform);
+
+
         Player.Instance.gameObject.BroadcastMessage("PowerUp", this, SendMessageOptions.DontRequireReceiver);
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+
+        //Globals.Instance.powerUp(this);
+
+        
+
+        //Destroy(this.gameObject, 0.1f);
+
         Destroy(this.gameObject);
     }
 
-    private void ShieldHit()
+
+
+
+#if UNITY_EDITOR
+
+    void OnDrawGizmos()
     {
-        //this.Hit();
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(this.transform.position, this.GetComponent<SphereCollider>().radius * this.transform.localScale.x);
+
+        Gizmos.color = Color.white;
+
+        //Gizmos.DrawWireSphere(this.transform.position, this.GetComponent<SphereCollider>().radius);
+
+        //Gizmos.color = new Color(1, 0, 0, 0.2f);
+        //Gizmos.DrawWireSphere(this.transform.position, this.targetRadius);
     }
 
-    private void BigBoomHit()
+#endif
+
+    private void OnGUI()
     {
-        //this.Hit();
-        // TODO ?????
+
+        Vector2 nativeSize = new Vector2(1800, 800);
+
+        float ratio = Screen.width / nativeSize.x;
+
+        //Vector3 scale = new Vector3(Screen.width / nativeSize.x, Screen.height / nativeSize.y, 1.0f);
+
+
+
+        GUIStyle style = new GUIStyle();
+
+        style.fontSize = (int)(12 * ratio);
+
+        style.normal.textColor = Color.white;
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+
+
+        GUI.Label(new Rect(screenPos.x + (20 * ratio), Screen.height - screenPos.y, 1000, 300), this.prize.ToString(), style);
+
+        float remaining = this.timer - Time.time;
+
+        GUI.Label(new Rect(screenPos.x + (20 * ratio), Screen.height - screenPos.y + (20 * ratio), 1000, 300), remaining.ToString(), style);
+
+
     }
 
-    //private void OnGUI()
-    //{
-    //    Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
-    //    GUI.Label(new Rect(screenPos.x, Screen.height - screenPos.y, 1000, 300), this.prize.ToString());
-    //}
-
-    private void GameIsOver()
+    private void EndGame()
     {
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
         Destroy(this.gameObject);
     }
+
 }
+
 

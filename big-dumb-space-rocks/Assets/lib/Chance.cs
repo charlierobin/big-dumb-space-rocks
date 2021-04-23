@@ -158,34 +158,4 @@ public class Chance
 
         //return new Vector2(0, 0);
     }
-
-    public static PowerUps.Prize RandomPrize()
-    {
-        int prize = Chance.RandomIntegerInRange(1, System.Enum.GetNames(typeof(PowerUps.Prize)).Length);
-
-        if (prize == 1)
-        {
-            return PowerUps.Prize.Faster;
-        }
-        else if (prize == 2)
-        {
-            return PowerUps.Prize.MorePowerful;
-        }
-        else if (prize == 3)
-        {
-            return PowerUps.Prize.BigBoom;
-        }
-        else if (prize == 4)
-        {
-            return PowerUps.Prize.MultiPass;
-        }
-        else if (prize == 5)
-        {
-            return PowerUps.Prize.Shield;
-        }
-        else
-        {
-            return PowerUps.Prize.SuperFast;
-        }
-    }
 }

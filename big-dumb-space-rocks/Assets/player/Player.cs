@@ -1,24 +1,40 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Singleton<Player>
 {
-    public GameObject engineGlow;
-    public GameObject explosionPrefab;
+    public GameObject explosion;
+
+    private Rigidbody rb;
+
+    //private StandardWeapon sw;
+
+    private bool guiDone;
+
+    private float health;
 
     private float speed = 100.0f;
     private bool engineOn = false;
 
-    private float health = 1.0f;
-
-    private float lastHit;
-
-    private Rigidbody rb;
-
     private void Start()
     {
         this.rb = this.GetComponent<Rigidbody>();
+        //this.sw = this.GetComponentInChildren<StandardWeapon>();
+
+        this.health = 1.0f;
+    }
+
+    public void reduceHealth(float amount)
+    {
+        this.health = this.health - amount;
+
+        this.health = Mathf.Max(this.health, 0);
+
+        if (this.health <= 0)
+        {
+            this.destroy();
+        }
     }
 
     private void Update()
@@ -28,46 +44,12 @@ public class Player : Singleton<Player>
         if (Input.GetButtonDown("Debug Reset"))
         {
             this.destroy();
+            return;
         }
 
-
-
-
-
-        if (Input.GetButtonDown("Fire3"))
-        {
-            this.gameObject.BroadcastMessage("FireMultiShot", SendMessageOptions.DontRequireReceiver);
-        }
-
-        if (Input.GetButtonDown("Fire2"))
-        {
-            this.gameObject.BroadcastMessage("FireBigBoom", SendMessageOptions.DontRequireReceiver);
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            this.gameObject.BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
-        }
-        else if (Input.GetButton("Fire1"))
-        {
-            this.gameObject.BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
-        }
-
-        if (Input.GetButton("Shield"))
-        {
-            this.gameObject.BroadcastMessage("ShieldUp", SendMessageOptions.DontRequireReceiver);
-        }
-        else if (Input.GetButtonUp("Shield"))
-        {
-            this.gameObject.BroadcastMessage("ShieldDown", SendMessageOptions.DontRequireReceiver);
-        }
-
-        float rotation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float rotation = Input.GetAxis("Horizontal") * this.speed * Time.deltaTime;
 
         this.transform.Rotate(0, 0, -rotation);
-
-
-
 
         float thrust = Input.GetAxis("Vertical") * 10.0f * Time.deltaTime;
 
@@ -90,60 +72,65 @@ public class Player : Singleton<Player>
             }
         }
 
-
-        if (this.health < 1.0f)
+        if (Input.GetButtonDown("Fire1"))
         {
-            if (Time.time > this.lastHit + 5.0f)
-            {
-                this.health = this.health + 0.01f;
-                this.health = Mathf.Min(this.health, 1.0f);
-            }
-            GameUI.SendMessage("UpdateHealthBar", this.health);
+            this.gameObject.BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
         }
+        else if (Input.GetButton("Fire1"))
+        {
+            this.gameObject.BroadcastMessage("Fire", SendMessageOptions.DontRequireReceiver);
+        }
+
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            this.gameObject.BroadcastMessage("FireBigBoom", SendMessageOptions.DontRequireReceiver);
+        }
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            this.gameObject.BroadcastMessage("FireMultiShot", SendMessageOptions.DontRequireReceiver);
+        }
+
+        if (Input.GetButton("Shield"))
+        {
+            this.gameObject.BroadcastMessage("ShieldUp", SendMessageOptions.DontRequireReceiver);
+        }
+        else if (Input.GetButtonUp("Shield"))
+        {
+            this.gameObject.BroadcastMessage("ShieldDown", SendMessageOptions.DontRequireReceiver);
+        }
+
     }
 
-    private void OnTriggerEnter(Collider collision)
+    public void GUI()
     {
-        if (collision.tag != "hittable") return;
+        if (this.guiDone) return;
 
-        if (this.GetComponentInChildren<Shield>().on)
+        this.guiDone = true;
+
+        GUILayout.BeginVertical(GUILayout.Width(150));
+
+        if (GUILayout.Button("Suicide"))
         {
-            return;
-        }
-
-        if (collision.gameObject.TryGetComponent<PowerUp>(out PowerUp powerup))
-        {
-            return;
-        }
-
-        this.lastHit = Time.time;
-
-        collision.gameObject.SendMessage("PlayerHit", this.gameObject, SendMessageOptions.DontRequireReceiver);
-
-        this.health = this.health - 0.1f;
-
-        if (this.health <= 0.0f)
-        {
-            this.health = 0.0f;
-
             this.destroy();
         }
 
-        GameUI.SendMessage("UpdateHealthBar", this.health);
+        GUILayout.Label("Health: " + this.health.ToString());
+
+        GUILayout.EndVertical();
+
+        this.BroadcastMessage("GUI", SendMessageOptions.DontRequireReceiver);
+
+        this.guiDone = false;
     }
 
-    private void destroy()
+    public void destroy()
     {
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+        Instantiate(this.explosion, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
 
         Destroy(this.gameObject);
 
-        Game.Instance.SendMessage("PlayerKilled");
+        Globals.Instance.playerWasDestroyed();
     }
 }
-
-// TODO the player can hit something, a bullet can hit something
-// player -> asteroid, flying saucer, flying saucer bullet
-// player -> power up
-
-// bullet -> asteroid, saucer, powerup

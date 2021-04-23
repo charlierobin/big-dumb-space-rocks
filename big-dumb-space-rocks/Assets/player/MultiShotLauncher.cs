@@ -10,6 +10,8 @@ public class MultiShotLauncher : MonoBehaviour
     private float timer = 0.0f;
     private float interval = 0.15f;
 
+    public int powerCount = 1;
+
     private void Start()
     {
         Destroy(this.gameObject, 2.00f);
@@ -20,7 +22,7 @@ public class MultiShotLauncher : MonoBehaviour
         if (Time.time < this.timer) return;
 
         GameObject newBullet = Instantiate(this.bulletPrefab, this.spawnPoint.position, Quaternion.identity);
-        newBullet.GetComponent<Bullet>().Fire(this.transform, 4.0f, 2);
+        newBullet.GetComponent<Bullet>().Initialise(this.transform, 4.0f, this.powerCount);
 
         this.timer = Time.time + this.interval;
     }

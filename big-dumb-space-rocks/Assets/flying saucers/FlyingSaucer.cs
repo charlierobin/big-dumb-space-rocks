@@ -7,44 +7,35 @@ public class FlyingSaucer : MonoBehaviour
     public GameObject explosionPrefab;
 
     protected int value;
-    protected bool gameOver = false;
 
     public void Initialise(Vector2 direction)
     {
         Rigidbody rb = this.GetComponent<Rigidbody>();
+
         rb.AddForce(direction * Random.Range(0.5f, 2.0f), ForceMode.Impulse);
     }
 
-    // TODO at the moment, bullet detects collision, sends hit ...
-    // change: each detects, handles their own way ... no hit messages?
+   
 
     public void Hit()
     {
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, SpawnLevels.Instance.particlesZ), Quaternion.identity);
+        //Destroy(GetComponent<CircleCollider2D>());
 
-        Game.Instance.addToScore(this.value);
-        Destroy(this.gameObject, 0.1f);
+        //Explosions.Instance.newAt(this.transform);
+        //Game.Instance.addToScore(this.value);
+
+        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+
+        Globals.Instance.addToScore(this.value);
+
+        Destroy(this.gameObject);
     }
 
-    private void ShieldHit()
+    protected void EndGame()
     {
-        this.Hit();
+        this.GetComponent<WrapAroundScreen>().enabled = false;
+        this.GetComponent<DestroyOffScreen>().enabled = true;
     }
 
-    private void BigBoomHit()
-    {
-        this.Hit();
-    }
 
-    private void PlayerHit()
-    {
-        this.Hit();
-    }
-
-    public void GameIsOver()
-    {
-        Destroy(GetComponent<WrapAroundScreen>());
-        this.gameObject.AddComponent<DestroyOffScreen>();
-        this.gameOver = true;
-    }
 }

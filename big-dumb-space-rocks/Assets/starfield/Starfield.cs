@@ -6,10 +6,12 @@ public class Starfield : MonoBehaviour
 {
     private Rigidbody rb;
 
-    private float range = 0.05f;
-    private float minimum = 0.02f;
+    public float range = 0.05f;
+    public float minimum = 0.02f;
 
-    private float limit = 0.01f;
+    public float limit = 0.02f;
+
+    private float timer;
 
     private void Start()
     {
@@ -18,6 +20,8 @@ public class Starfield : MonoBehaviour
 
     private void Update()
     {
+        if (Time.time <= timer) return;
+
         if (rb.angularVelocity.x < limit && rb.angularVelocity.y < limit && rb.angularVelocity.z < limit)
         {
             Chance.Axis axis = Chance.RandomAxis();
@@ -34,6 +38,8 @@ public class Starfield : MonoBehaviour
             {
                 rb.AddRelativeTorque(0.0f, 0.0f, this.random(), ForceMode.Impulse);
             }
+
+            timer = Time.time + 5.0f;
         }
     }
 
@@ -47,7 +53,7 @@ public class Starfield : MonoBehaviour
         }
         else
         {
-            value = Mathf.Max(-minimum, value);
+            value = Mathf.Min(-minimum, value);
         }
 
         return value;

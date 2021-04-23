@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BigBoomWeapon : MonoBehaviour
 {
-    public GameObject bulletSpawnPoint;
     public GameObject bigBoomPrefab;
+    public GameObject bulletSpawnPoint;
+
+    //private Light globalLighting;
 
     private float timer;
     private float interval = 0.25f;
@@ -19,7 +21,10 @@ public class BigBoomWeapon : MonoBehaviour
 
     private void Start()
     {
-        GameUI.SendMessage("UpdateBigBoomCount", this.count);
+        //this.globalLighting = F
+
+
+        //GameUI.SendMessage("UpdateBigBoomCount", this.count);
     }
 
     private void FireBigBoom()
@@ -35,11 +40,13 @@ public class BigBoomWeapon : MonoBehaviour
         this.timer = Time.time + this.interval;
         this.keyDownTimer = Time.time + this.keyDownSensitivity;
 
-        GameUI.SendMessage("UpdateBigBoomCount", this.count);
+        //GameUI.SendMessage("UpdateBigBoomCount", this.count);
     }
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
+
         if (Input.GetButtonUp("Fire2"))
         {
             if (Time.time > this.keyDownTimer)
@@ -58,8 +65,20 @@ public class BigBoomWeapon : MonoBehaviour
         if (powerUp.prize == PowerUps.Prize.BigBoom)
         {
             this.count++;
-            GameUI.SendMessage("UpdateBigBoomCount", this.count);
+            //GameUI.SendMessage("UpdateBigBoomCount", this.count);
         }
+    }
+
+    private void GUI()
+    {
+        GUILayout.BeginVertical(GUILayout.Width(150));
+
+        if (GUILayout.Button("BBW + (" + this.count.ToString() + ")"))
+        {
+            this.count = this.count + 1;
+        }
+
+        GUILayout.EndVertical();
     }
 }
 
