@@ -82,7 +82,9 @@ public class PowerUp : MonoBehaviour
     {
         GUIStyle style = new GUIStyle();
 
-        style.fontSize = (int)(style.fontSize * Globals.Instance.ratio);
+        //style.fontSize = (int)(style.fontSize * Globals.Instance.ratio);
+
+        style.fontSize = (int)(12 * Globals.Instance.ratio);
 
         style.normal.textColor = Color.white;
 

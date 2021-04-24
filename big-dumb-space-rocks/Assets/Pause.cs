@@ -20,6 +20,8 @@ public class Pause : Singleton<Pause>
 
     private void Update()
     {
+        if (!Globals.Instance.GameRunning()) return;
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (!this.pausing && !this.paused)

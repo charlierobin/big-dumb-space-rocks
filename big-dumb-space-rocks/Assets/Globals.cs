@@ -79,11 +79,6 @@ public class Globals : Singleton<Globals>
 
             this.BroadcastAll("EndGame", null);
 
-            //foreach (HighScoreEntry highscore in this.highScores)
-            //{
-            //    highscore.lastGame = false;
-            //}
-
             this.highScores.ForEach((value) => value.lastGame = false);
 
             this.highScores.Add(new HighScoreEntry("Charlie (" + System.DateTime.Now.ToString() + ")", this.score, true));
@@ -191,7 +186,7 @@ public class Globals : Singleton<Globals>
             {
                 if (highscore.lastGame)
                 {
-                    GUILayout.Label(highscore.name + ": " + highscore.score.ToString() + " <---");
+                    GUILayout.Label(highscore.name + ": " + highscore.score.ToString() + " <");
                 }
                 else
                 {
