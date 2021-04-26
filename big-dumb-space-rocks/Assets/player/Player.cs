@@ -8,11 +8,10 @@ public class Player : Singleton<Player>
 
     private Rigidbody rb;
 
-    //private StandardWeapon sw;
-
     private bool guiDone;
 
     private float health;
+    private float healthTimer;
 
     private float speed = 100.0f;
     private bool engineOn = false;
@@ -20,7 +19,6 @@ public class Player : Singleton<Player>
     private void Start()
     {
         this.rb = this.GetComponent<Rigidbody>();
-        //this.sw = this.GetComponentInChildren<StandardWeapon>();
 
         this.health = 1.0f;
     }
@@ -31,6 +29,8 @@ public class Player : Singleton<Player>
 
         this.health = Mathf.Max(this.health, 0);
 
+        this.healthTimer = Time.time + 10.0f;
+
         if (this.health <= 0)
         {
             this.destroy();
@@ -40,6 +40,8 @@ public class Player : Singleton<Player>
     private void Update()
     {
         if (Time.timeScale == 0.0f) return;
+
+        if (this.health < 1.0f && Time.time >= this.healthTimer) this.health = 1.0f;
 
         if (Input.GetButtonDown("Debug Reset"))
         {
@@ -117,6 +119,13 @@ public class Player : Singleton<Player>
         }
 
         GUILayout.Label("Health: " + this.health.ToString());
+
+        if (this.health < 1.0f)
+        {
+            GUILayout.Space(5);
+
+            GUILayout.Label((this.healthTimer - Time.time).ToString());
+        }
 
         GUILayout.EndVertical();
 
