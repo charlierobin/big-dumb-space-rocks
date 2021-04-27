@@ -4,32 +4,19 @@ using UnityEngine;
 
 public class BigBoomBlastRadius : MonoBehaviour
 {
-    //public Gradient colour;
+    public Gradient colour;
 
-    //private float startScale = 0.0f;
+    public SpriteRenderer sprite;
 
-    //private float rate = 1.3f;
+    private float startScale;
 
-    private float lifetime;
-    private float endTime;
-
-    public float targetRadius = 1.0f;
+    private float endScale = 50.0f;
+    public float rate = 1.0f;
 
     private void Start()
     {
-        //this.transform.localPosition = new Vector3(0, 0, -ZLayers.Instance.particles);
-
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.objects);
-
-        //this.lifetime = this.gameObject.GetComponentInParent<Destroyer>().lifetime;
-
-        this.lifetime = 2.0f;
-
-        this.endTime = Time.time + this.lifetime;
-
-
-
-        //this.transform.localScale = new Vector3(this.startScale, this.startScale, this.startScale);
+        this.startScale = this.transform.localScale.x;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,36 +28,19 @@ public class BigBoomBlastRadius : MonoBehaviour
 
     private void Update()
     {
-        if (this.GetComponent<SphereCollider>().radius > this.targetRadius)
+        if (this.transform.localScale.x >= this.endScale)
         {
-            //this.GetComponent<SphereCollider>().enabled = false;
-            //this.enabled = false;
-
             this.gameObject.SetActive(false);
 
             return;
         }
 
-        //float newScale = this.transform.localScale.x + (rate * Time.deltaTime);
+        float newScale = this.transform.localScale.x + (this.rate * Time.deltaTime);
 
-        //this.transform.localScale = new Vector3(newScale, newScale, newScale);
+        this.transform.localScale = new Vector3(newScale, newScale, newScale);
 
-        //this.GetComponent<SpriteRenderer>().color = this.colour.Evaluate(1.0f - ((this.endTime - Time.time) / this.lifetime));
+        float t = newScale / (this.endScale - this.startScale);
 
-
-        this.GetComponent<SphereCollider>().radius = GetComponent<SphereCollider>().radius + 0.05f;
+        this.sprite.color = this.colour.Evaluate(t);
     }
-
-
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, this.GetComponent<SphereCollider>().radius * this.transform.localScale.x);
-
-        Gizmos.color = new Color(1, 0, 0, 0.2f);
-        Gizmos.DrawWireSphere(this.transform.position, this.targetRadius);
-    }
-
-
 }
