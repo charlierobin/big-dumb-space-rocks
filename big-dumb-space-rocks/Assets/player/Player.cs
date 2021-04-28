@@ -6,6 +6,8 @@ public class Player : Singleton<Player>
 {
     public GameObject explosion;
 
+    public Gradient healthColours;
+
     private Rigidbody rb;
 
     private bool guiDone;
@@ -15,6 +17,9 @@ public class Player : Singleton<Player>
 
     private float speed = 100.0f;
     private bool engineOn = false;
+
+    private static Texture2D _staticRectTexture;
+    private static GUIStyle _staticRectStyle;
 
     private void Start()
     {
@@ -105,6 +110,33 @@ public class Player : Singleton<Player>
 
     }
 
+    public static void GUIDrawRect(Color color, float width)
+    {
+        if (_staticRectTexture == null)
+        {
+            _staticRectTexture = new Texture2D(1, 1);
+        }
+
+        if (_staticRectStyle == null)
+        {
+            _staticRectStyle = new GUIStyle();
+        }
+
+        _staticRectTexture.SetPixel(0, 0, color);
+
+        _staticRectTexture.Apply();
+
+        _staticRectStyle.normal.background = _staticRectTexture;
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Space((150 - width) / 2);
+
+        GUILayout.Box(_staticRectTexture, _staticRectStyle, GUILayout.Width(width), GUILayout.Height(10));
+
+        GUILayout.EndHorizontal();
+    }
+
     public void GUI()
     {
         if (this.guiDone) return;
@@ -118,13 +150,17 @@ public class Player : Singleton<Player>
             this.destroy();
         }
 
-        GUILayout.Label("Health: " + this.health.ToString());
+        GUILayout.Space(5);
+
+        GUIDrawRect(this.healthColours.Evaluate(this.health / 1.0f), (this.health / 1.0f) * (150 - 20));
 
         if (this.health < 1.0f)
         {
             GUILayout.Space(5);
 
-            GUILayout.Label((this.healthTimer - Time.time).ToString());
+            int remaining = (int)(this.healthTimer - Time.time);
+
+            GUILayout.Label(remaining.ToString());
         }
 
         GUILayout.EndVertical();

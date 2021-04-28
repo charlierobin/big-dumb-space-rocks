@@ -11,7 +11,7 @@ public class BigBoomBlastRadius : MonoBehaviour
     private float startScale;
 
     private float endScale = 50.0f;
-    public float rate = 1.0f;
+    public float rate = 20.0f;
 
     private void Start()
     {

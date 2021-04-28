@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prize: 0
   countdown: {fileID: 0}
-  explosionPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 2512011103895736181, guid: 427a67600d21547ddb3b968d748ac41d,
+    type: 3}
+  fontSize: 12
 --- !u!135 &1199827548562547326
 SphereCollider:
   m_ObjectHideFlags: 0

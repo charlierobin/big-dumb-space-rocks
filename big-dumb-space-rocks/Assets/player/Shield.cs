@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    private float maxPower = 10.0f;
+    public Gradient healthColours;
+
+    private static Texture2D _staticRectTexture;
+    private static GUIStyle _staticRectStyle;
+
+    private float maxPower = 1.0f;
 
     private float power = 1.0f;
 
     //private float targetRadius = 1.0f;
 
-    public bool on;
-
-    //private bool dirty = false;
+    private bool on;
 
     private void Start()
     {
         this.power = this.maxPower;
+
+        if (_staticRectTexture == null)
+        {
+            _staticRectTexture = new Texture2D(1, 1);
+        }
+
+        if (_staticRectStyle == null)
+        {
+            _staticRectStyle = new GUIStyle();
+        }
     }
 
     private void ShieldUp()
@@ -73,6 +86,23 @@ public class Shield : MonoBehaviour
         //}
     }
 
+    public static void GUIDrawRect(Color color, float width)
+    {
+        _staticRectTexture.SetPixel(0, 0, color);
+
+        _staticRectTexture.Apply();
+
+        _staticRectStyle.normal.background = _staticRectTexture;
+
+        GUILayout.BeginHorizontal();
+
+        GUILayout.Space((150 - width) / 2.0f);
+
+        GUILayout.Box(_staticRectTexture, _staticRectStyle, GUILayout.Width(width), GUILayout.Height(10));
+
+        GUILayout.EndHorizontal();
+    }
+
     private void GUI()
     {
         GUILayout.BeginVertical(GUILayout.Width(150));
@@ -83,7 +113,11 @@ public class Shield : MonoBehaviour
                 this.power = this.maxPower;
             }
 
-            GUILayout.Label("Power: " + this.power.ToString());
+            //GUILayout.Label("Power: " + this.power.ToString());
+
+            //GUILayout.Space(5);
+
+            GUIDrawRect(this.healthColours.Evaluate(this.power / 1.0f), (this.power / 1.0f) * (150 - 20));
         }
         GUILayout.EndVertical();
     }
