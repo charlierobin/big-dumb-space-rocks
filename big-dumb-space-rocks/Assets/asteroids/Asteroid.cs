@@ -9,6 +9,7 @@ public class Asteroid : MonoBehaviour
     private GameObject bullet;
     public GameObject sparksPrefab;
     public GameObject explosionPrefab;
+    public GameObject explosionFromShieldPrefab;
 
     private void Start()
     {
@@ -60,7 +61,7 @@ public class Asteroid : MonoBehaviour
         }
         else
         {
-            Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+            Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, ZLayers.Instance.particles), sender.transform.rotation);
         }
 
         Globals.Instance.addToScore(100 * this.factor);
@@ -68,9 +69,11 @@ public class Asteroid : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void BigBoomHit()
+    private void BigBoomHit(GameObject sender)
     {
         Globals.Instance.addToScore(100 * this.factor);
+
+        Instantiate(this.explosionPrefab, new Vector3(sender.transform.position.x, sender.transform.position.y, ZLayers.Instance.particles), sender.transform.rotation);
 
         Destroy(this.gameObject);
     }
@@ -79,7 +82,7 @@ public class Asteroid : MonoBehaviour
     {
         Globals.Instance.addToScore(100 * this.factor);
 
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+        Instantiate(this.explosionFromShieldPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
 
         Destroy(this.gameObject);
     }
@@ -88,7 +91,7 @@ public class Asteroid : MonoBehaviour
     {
         Globals.Instance.addToScore(100 * this.factor);
 
-        Instantiate(this.explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
+        Instantiate(this.explosionFromShieldPrefab, new Vector3(this.transform.position.x, this.transform.position.y, ZLayers.Instance.particles), Quaternion.identity);
 
         Destroy(this.gameObject);
     }

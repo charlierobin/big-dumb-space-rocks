@@ -145,6 +145,8 @@ MonoBehaviour:
     type: 3}
   explosionPrefab: {fileID: 2512011103895736181, guid: abdc573176fcb479ab9c5b6c4eb2a437,
     type: 3}
+  explosionFromShieldPrefab: {fileID: 2512011103895736181, guid: 7e0f9cda764774922af5abf61fb7b7d7,
+    type: 3}
 --- !u!114 &738542771018826742
 MonoBehaviour:
   m_ObjectHideFlags: 0

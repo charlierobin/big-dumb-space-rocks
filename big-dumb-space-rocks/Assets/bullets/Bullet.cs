@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
 
         other.gameObject.SendMessage("Hit", this.gameObject, SendMessageOptions.DontRequireReceiver);
 
-        if (this.powerCount == 0)
+        if (this.powerCount <= 0)
         {
             Destroy(this.gameObject);
         }

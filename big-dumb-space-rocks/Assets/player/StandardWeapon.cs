@@ -37,13 +37,9 @@ public class StandardWeapon : MonoBehaviour
     {
         if (Time.time < this.timer) return;
 
-
-
         GameObject newBullet = Instantiate(this.bulletPrefab, this.bulletSpawnPoint.transform.position, Quaternion.identity);
 
         newBullet.GetComponent<Bullet>().Initialise(this.transform, 3.0f + this.rb.velocity.magnitude, this.powerCount);
-
-
 
         if (this.superFastEnabled)
         {
@@ -70,8 +66,15 @@ public class StandardWeapon : MonoBehaviour
     {
         if (powerUp.prize == PowerUps.Prize.MorePowerful)
         {
-            this.powerCount++;
-            this.powerCount = Mathf.Min(this.maxPowerCount, this.powerCount);
+            if (this.powerCount >= maxPowerCount)
+            {
+                this.gameObject.GetComponent<MultiShotWeapon>().IncrementPower();
+            }
+            else
+            {
+                this.powerCount++;
+                this.powerCount = Mathf.Min(this.maxPowerCount, this.powerCount);
+            }
 
             //GameUI.SendMessage("UpdateBulletPowerBar", (this.powerCount * 1.0f) / this.maxPowerCount);
         }

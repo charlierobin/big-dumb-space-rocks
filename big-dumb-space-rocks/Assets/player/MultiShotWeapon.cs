@@ -62,6 +62,12 @@ public class MultiShotWeapon : MonoBehaviour
         }
     }
 
+    public void IncrementPower()
+    {
+        this.powerCount++;
+        this.powerCount = Mathf.Min(this.maxPowerCount, this.powerCount);
+    }
+
     private void GUI()
     {
         GUILayout.BeginVertical(GUILayout.Width(150));
